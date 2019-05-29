@@ -1,0 +1,533 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-9 mr-auto ml-auto">
+        <!--      Wizard container        -->
+        <div class="wizard-container">
+          <div class="card card-wizard" data-color="rose" id="wizardProfile">
+            <form [formGroup]="type" action="" method="">
+              <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
+              <div class="card-header text-center">
+                <h3 class="card-title">
+                  Build Your Profile
+                </h3>
+                <h5 class="card-description">This information will let us know more about you.</h5>
+              </div>
+              <div class="wizard-navigation">
+                <ul class="nav nav-pills">
+                  <li class="nav-item">
+                    <!--personalInfo active-->
+                    <a class="nav-link active" href="#personalInfo" data-toggle="tab" role="tab">
+                      Personal Information
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#address" data-toggle="tab" role="tab">
+                      Address
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#additionalInfo" data-toggle="tab" role="tab">
+                      Additional Member
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link " href="#contacts" data-toggle="tab" role="tab">
+                      Contacts
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#terms" data-toggle="tab" role="tab">
+                      Contract Information
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <div class="tab-content">
+                  <!-- PERSONAL INFORMATION -->
+                  <div class="tab-pane active" id="personalInfo">
+                    <h5 class="info-text"> Let's start with YOUR PERSONAL INFORMATION</h5>
+                    <div class="row justify-content-center">
+                        <div class="col-sm-5">
+                            <div class="input-group form-control-lg">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                  <i class="material-icons">face</i>
+                                </span>
+                                <mat-form-field class="example-full-width has-label"
+                                  [ngClass]="displayFieldCss(type, 'firstName')">
+                                  <input type="text" name="firstname" matInput id="text" placeholder="First Name"
+                                    formControlName="firstName">
+                                </mat-form-field>
+                              </div>
+                            </div>
+                        </div>
+                      <div class="col-sm-6">
+                        <div class="input-group form-control-lg">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <i class="material-icons">record_voice_over</i>
+                            </span>
+                            <mat-form-field class="example-full-width has-label"
+                              [ngClass]="displayFieldCss(type, 'lastName')">
+                              <input type="text" name="lastname" matInput id="text" placeholder="last Name"
+                                formControlName="lastName">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="input-group form-control-lg">
+                        <div class="row" style="width:100%">
+                          <div class="col-sm-16" style="width:100%">
+                            <div class="row" style="width:100%">
+                              <div class="col-7 ml-auto mr-auto">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <i class="material-icons">perm_identity</i>
+                                  </span>
+                                  <mat-form-field class="example-full-width has-label"
+                                    [ngClass]="displayFieldCss(type, 'idnumber')">
+                                    <input type="number" name="idnumber" matInput id="idnumber" placeholder="ID Number"
+                                      formControlName="idnumber">
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                              <div class="col-5 ml-auto mr-auto">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <i class="material-icons">wc</i>
+                                  </span>
+                                  <mat-form-field [ngClass]="displayFieldCss(type, 'gender')">
+                                    <mat-select placeholder="Select Gender" id="gender" name="gender" class="gender"
+                                      formControlName="gender">
+                                      <mat-option *ngFor="let gender of genders" [value]=" gender.value ">
+                                        {{ gender.name }}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                              <div class="col-8" >
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <i class="material-icons">people</i>
+                                  </span>
+                                  <mat-form-field [ngClass]="displayFieldCss(type, 'society')">
+                                    <mat-select placeholder="Select Society" id="society" name="society" class="society"
+                                      formControlName="society">
+                                      <mat-option *ngFor="let society of societies" [value]=" society.idSociety ">
+                                        {{ society.name }}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- ADDITIONAL INFORMATION -->
+                  <div class="tab-pane" id="additionalInfo">
+                    <h5 class="info-text"> Add Beneficiaries to your policy </h5>
+                    <div class="row" style="margin-top: 0%">
+                      <div class="col-md-12">
+                        <div class="card">
+                          <div class="card-body text-center" style="padding: 0%">
+
+                            <div class="input-group form-control-lg">
+                              <div class="col-4">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <i class="material-icons">face</i>
+                                  </span>
+                                  <mat-form-field class="example-full-width has-label"
+                                    [ngClass]="displayFieldCss(type, 'beneficiaryName')">
+                                    <input type="text" name="beneficiaryName" matInput id="beneficiaryName"
+                                      placeholder="Name" formControlName="beneficiaryName">
+                                  </mat-form-field>
+                                </div>
+                                <div>
+                                </div>
+                              </div>
+                              <div class="col-4">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <i class="material-icons">perm_identity</i>
+                                  </span>
+                                  <mat-form-field class="example-full-width has-label"
+                                    [ngClass]="displayFieldCss(type, 'beneficiarySurname')">
+                                    <input type="text" name="beneficiarySurname" matInput id="beneficiarySurname"
+                                      placeholder="Surname" formControlName="beneficiarySurname">
+                                  </mat-form-field>
+                                </div>
+                                <div>
+                                </div>
+                              </div>
+                              <div class="col-4">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <i class="material-icons">perm_identity</i>
+                                  </span>
+                                  <mat-form-field class="example-full-width has-label"
+                                    [ngClass]="displayFieldCss(type, 'beneficiaryID')">
+                                    <input type="number" name="beneficiaryID" matInput id="beneficiaryID"
+                                      placeholder="ID Number" formControlName="beneficiaryID">
+                                  </mat-form-field>
+
+                                  <button mat-raised-button mat-min-fab class="btn btn-danger btn-link btn-fab">
+                                    <i class="material-icons">close</i>
+                                  </button>
+                                </div>
+                                <div>
+                                </div>
+                              </div>
+                            </div>
+                            <br />
+
+                          </div>
+
+                          <div class="card-body text-center"  style="padding: 0%">
+
+                            <div class="input-group form-control-lg" formArrayName="beneficiary"
+                              *ngFor="let benefit of Beneficiary.controls; let i = index" [formControlName]="i">
+                              <div class="col-4" >
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <i class="material-icons">face</i>
+                                  </span>
+                                  <mat-form-field class="example-full-width has-label"
+                                    [ngClass]="displayFieldCss(type, 'beneficiaryName')">
+                                    <input type="text" name="beneficiaryName" matInput id="beneficiaryName"
+                                      placeholder="Name" formControlName="beneficiaryName">
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                              <div class="col-4" >
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <i class="material-icons">perm_identity</i>
+                                  </span>
+                                  <mat-form-field class="example-full-width has-label"
+                                    [ngClass]="displayFieldCss(type, 'beneficiarySurname')">
+                                    <input type="text" name="beneficiarySurname" matInput id="beneficiarySurname"
+                                      placeholder="Surname" formControlName="beneficiarySurname">
+                                  </mat-form-field>
+                                </div>
+                                <div>
+                                </div>
+                              </div>
+                              <div class="col-4" >
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <i class="material-icons">perm_identity</i>
+                                  </span>
+                                  <mat-form-field class="example-full-width has-label"
+                                    [ngClass]="displayFieldCss(type, 'beneficiaryID')">
+                                    <input type="number" name="beneficiaryID" matInput id="beneficiaryID"
+                                      placeholder="ID Number" formControlName="beneficiaryID">
+                                  </mat-form-field>
+
+                                  <button mat-raised-button mat-min-fab class="btn btn-danger btn-link btn-fab"
+                                    (click)="removeBeneficiary(i)" class="remove" id="remove" name="remove">
+                                    <i class="material-icons">close</i>
+                                  </button>
+                                </div>
+                                <div>
+                                </div>
+                              </div>
+                            </div>
+                            <br />
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <button mat-raised-button class="btn btn-primary btn-sm" (click)="addBeneficiary()" class="add"
+                      id="add" name="add">Add
+                      Benefetiary</button>
+                  </div>
+                  <!--
+                              
+        <div class="row">
+          <div class="col-md-6 ml-auto mr-auto">
+            <div class="card">
+              <div class="card-body text-center">
+                <code>col-md-6 ml-auto mr-auto</code>
+              </div>
+            </div>
+          </div>
+        </div>
+                              <div class="input-group form-control-lg">
+                                <div class="row" style="width:100%">
+                                  <div class="col-sm-16" style="width:100%">
+                                    <div class="row" style="width:100%">
+                                      <div class="col-4 ml-auto mr-auto">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text">
+                                            <i class="material-icons">face</i>
+                                          </span>
+                                          <mat-form-field class="example-full-width has-label"
+                                            [ngClass]="displayFieldCss(type, 'idnumber')">
+                                            <input type="number" name="idnumber" matInput id="idnumber"
+                                              placeholder="Name" formControlName="idnumber">
+                                          </mat-form-field>
+                                        </div>
+                                        <div>
+                                        </div>
+                                      </div>
+                                      <div class="col-7 ml-auto mr-auto">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text">
+                                            <i class="material-icons">perm_identity</i>
+                                          </span>
+                                          <mat-form-field class="example-full-width has-label"
+                                            [ngClass]="displayFieldCss(type, 'idnumber')">
+                                            <input type="number" name="idnumber" matInput id="idnumber"
+                                              placeholder="Surname" formControlName="idnumber">
+                                          </mat-form-field>
+                                        </div>
+                                        <div>
+                                        </div>
+                                      </div>
+                                      <div class="col-7 ml-auto mr-auto">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text">
+                                            <i class="material-icons">perm_identity</i>
+                                          </span>
+                                          <mat-form-field class="example-full-width has-label"
+                                            [ngClass]="displayFieldCss(type, 'idnumber')">
+                                            <input type="number" name="idnumber" matInput id="idnumber"
+                                              placeholder="ID Number" formControlName="idnumber">
+                                          </mat-form-field>
+                                        </div>
+                                        <div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <br />
+                               <input type="button" class="btn btn-previous btn-fill btn-default btn-wd disabled" name="previous"
+                      value="ADD" id="prev">
+                            -->
+
+
+                  <!-- ADDRESS -->
+                  <div class="tab-pane" id="address">
+                    <div class="row justify-content-center">
+                      <div class="col-sm-12">
+                        <h5 class="info-text"> ADDRESS INFORMATION </h5>
+                      </div>
+                      <div class="col-sm-12">
+                        <h5 class="info-text"> </h5>
+                      </div>
+
+                      <!--                         
+                        <div class="col-sm-3" hidden>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                  <i class="material-icons">home</i>
+                                </span>
+                                <mat-form-field class="example-full-width has-label"
+                                  [ngClass]="displayFieldCss(type, 'housenumber')">
+                                  <input type="number" name="housenumber" matInput id="housenumber" class="housenumber" placeholder="House No."
+                                    formControlName="housenumber">
+                                </mat-form-field>
+                              </div>
+                        </div> 
+
+                        
+                      <div class="col-sm-7" hidden>
+                        <mat-form-field class="example-full-width">
+                          <input matInput type="text" placeholder="Street Name" name="streetname" class="streetname">
+                        </mat-form-field>
+                      </div>
+
+-->
+                      <div class="col-sm-4">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="material-icons">home</i>
+                          </span>
+                          <mat-form-field class="example-full-width has-label"
+                            [ngClass]="displayFieldCss(type, 'housenumber')">
+                            <input type="number" name="housenumber" matInput id="housenumber" class="housenumber"
+                              placeholder="House No." formControlName="housenumber">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="col-sm-7">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="material-icons">home</i>
+                          </span>
+                          <mat-form-field class="example-full-width has-label"
+                            [ngClass]="displayFieldCss(type, 'streetname')">
+                            <input type="text" name="streetname" matInput id="streetname" class="streetname"
+                              placeholder="Street Name" formControlName="streetname">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="material-icons">home</i>
+                          </span>
+                          <mat-form-field class="example-full-width has-label"
+                            [ngClass]="displayFieldCss(type, 'suburb')">
+                            <input type="text" name="suburb" matInput id="suburb" class="suburb" placeholder="Suburb"
+                              formControlName="suburb">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="material-icons">home</i>
+                          </span>
+                          <mat-form-field [ngClass]="displayFieldCss(type, 'province')">
+                            <mat-select placeholder="Select Province" matInput id="province" name="province"
+                              class="province" formControlName="province">
+                              <mat-option *ngFor="let province of provinces" [value]=" province.value ">
+                                {{ province.viewValue }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- CONTACTS -->
+                  <div class="tab-pane" id="contacts">
+                    <div class="row justify-content-center">
+                      <div class="col-sm-12">
+                        <h5 class="info-text"> CONTACT INFORMATION</h5>
+                      </div>
+                      <div class="col-sm-4" hidden>
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="material-icons">home</i>
+                          </span>
+                          <mat-form-field class="example-full-width has-label"
+                            [ngClass]="displayFieldCss(type, 'housenumber')">
+                            <input type="number" name="housenumber" matInput id="housenumber" class="housenumber"
+                              placeholder="House No." formControlName="housenumber">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="col-sm-7">
+                        <div class="input-group form-control-lg">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <i class="material-icons">phone</i>
+                            </span>
+                          </div>
+                          <mat-form-field class="example-full-width" [ngClass]="displayFieldCss(type, 'phone')">
+                            <input matInput type="number" placeholder="Phone No." name="phone" matInput id="phone"
+                              class="phone" formControlName="phone">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="col-lg-10 mt-3">
+                        <div class="input-group form-control-lg">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <i class="material-icons">email</i>
+                            </span>
+                          </div>
+                          <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Email (required)" [formControl]="emailFormControl" type="email"
+                              id="exampleemalil" name="email">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- TERMS AND CONDITIONS -->
+                  <div class="tab-pane" id="terms">
+                    <div class="row justify-content-center">
+                      <div class="col-sm-12">
+                        <h5 class="info-text"> CONTRACT INFORMATION </h5>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="card" style="background-color: whitesmoke">
+                            <div class="card-body">
+                              <div id="typography">
+                                <div class="row">
+
+                                  <div>
+                                    <p style="margin: 3%">But I must explain to you how all this mistaken idea of
+                                      denouncing pleasure
+                                      and praising pain was born and I will give you a complete account of the
+                                      system, and expound the actual teachings of the great explorer of the truth,
+                                      the master-builder of human happiness. No one rejects, dislikes, or avoids
+                                      pleasure itself, because it is pleasure, but because those who do not know how
+                                      to pursue pleasure rationally encounter consequences that are extremely
+                                      painful. Nor again is there anyone who loves or pursues or desires to obtain
+                                      pain of itself, because it is pain, but because occasionally circumstances
+                                      occur in which toil and pain can procure him some great pleasure. To take a
+                                      trivial example, which of us ever undertakes laborious physical exercise,
+                                      except to obtain some advantage from it? But who has any right to find fault
+                                      with a man who chooses to enjoy a pleasure that has no annoying consequences,
+                                      or one who avoids a pain that produces no resultant pleasure?</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-5 col-sm-offset-1 checkbox-radios">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" name="check1" id="check1" value=""> I
+                              agree to the Terms of Service
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" name="check2" id="check2" value="">
+                              Receive Newsletter
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="mr-auto">
+                  <input type="button" class="btn btn-previous btn-fill btn-default btn-wd disabled" name="previous"
+                    value="previous" id="prev">
+                </div>
+                <div class="ml-auto">
+                  <input type="button" class="btn btn-next btn-fill btn-rose btn-wd" name="next" id="next" value="Next">
+                  <input type="button" class="btn btn-finish btn-fill btn-rose btn-wd" name="finish" id="finish"
+                    value="Finish" style="display: none;" disabled='true'>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- wizard container -->
+      </div>
+    </div>
+  </div>
+</div>

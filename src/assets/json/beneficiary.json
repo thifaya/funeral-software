@@ -1,0 +1,33 @@
+{
+    "status": 200,
+    "error": null,
+    "response": [
+        {
+            "idBeneficiaries": 1,
+            "idMember": 1,
+            "name": "asdsad",
+            "surname": "asdasd",
+            "IDNumber": "asdasd",
+            "date": "asdasd",
+            "createdBy": 1
+        },
+        {
+            "idBeneficiaries": 2,
+            "idMember": 77,
+            "name": "asdasd",
+            "surname": "asdasd",
+            "IDNumber": "asdasd",
+            "date": "asdsad",
+            "createdBy": 1
+        },
+        {
+            "idBeneficiaries": 3,
+            "idMember": null,
+            "name": "ertyu",
+            "surname": "mabambi",
+            "IDNumber": null,
+            "date": "2019-4-30 13:49:34",
+            "createdBy": 1
+        }
+    ]
+}

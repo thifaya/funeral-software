@@ -1,0 +1,296 @@
+  
+  <div class="card " hidden>
+      <div class="card-header ">
+        <h4 class="card-title">Navigation Pills -
+          <small class="description">Horizontal Tabs</small>
+        </h4>
+      </div>
+      <div class="card-body ">
+        <ul class="nav nav-pills nav-pills-warning" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#link1" role="tablist">
+              Detail
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#link2" role="tablist">
+              Payments
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content tab-space">
+          <div class="tab-pane active" id="link1">
+            <div class="main-content" >
+              <div class="container-fluid">
+                <div class="card card-plain">
+                  <div class="card-body">
+                    <h4 class="card-title pl-3">XS Grid
+                      <small>Always Horizontal</small>
+                    </h4>
+                    <div class="row">
+                      <div class="col-4">
+                        <div class="card">
+                          <div class="card-body text-center">
+                              <div class="card card-stats">
+                                <div class="card-header card-header-rose card-header-icon">
+                                  <div class="card-icon">
+                                    <i class="material-icons">equalizer</i>
+                                  </div>
+                                  <p class="card-category">Policy Number</p>
+                                  <h3 class="card-title">75.521</h3>
+                                </div>
+                              </div>
+                              <div class="col-lg-3 col-md-6 col-sm-9">
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="card">
+                          <div class="card-body text-center">
+                            <code>col-4</code>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="card">
+                          <div class="card-body text-center">
+                            <code>col-4</code>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 ml-auto mr-auto">
+                        <div class="card">
+                          <div class="card-body text-center">
+                            <code>col-md-6 ml-auto mr-auto</code>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--  end card -->
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane" id="link2">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main-content">
+      <h3>Policy Number: #</h3>
+      <br />
+      <ul class="nav nav-pills nav-pills-primary nav-pills-icons " role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#details" role="tablist">
+            Details
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#payments" role="tablist">
+            Payments
+          </a>
+        </li>
+      </ul>
+        <div class="container-fluid">
+            <!-- Replace from here-->
+            <div class="tab-content tab-space tab-subcategories">
+              <div class="tab-pane active" id="details">
+                 <div class="row">
+                <div class="col-sm-4 cards">
+                    <div class="card card-pricing card-raised">
+                      <div class="card-body">
+                        <h6 class="card-category">Home Address</h6>
+                        <div class="card-icon icon-rose">
+                          <i class="material-icons">home</i>
+                        </div>
+                        <h3 class="card-title">$29</h3>
+                        <p class="card-description">
+                          This is good if your company size is between 2 and 10 Persons.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card col-sm-6 card-profile">
+                    <div class="card-avatar">
+                      <a href="#pablo">
+                        <img class="img" src="./assets/img/faces/marc.jpg" />
+                      </a>
+                    </div>
+                    <div class="card-body">
+                      <h6 class="card-category text-gray">Member Details</h6>
+                      <h4 class="card-title">Alec Thompson</h4>
+                      <p class="card-description">
+                        ID number: xxx        email:xxx 
+                      </p>
+                      <p class="card-description">
+                        Firstname: xxx        lastname: xxx
+                      </p>
+                      <p class="card-description" *ngIf="society">
+                        Society Name: xxx
+                      </p>
+                    </div>
+                  </div>
+                  
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body" hidden>
+                        <div class="table-responsive">
+                          <table class="table table-hover table-striped">
+                                  <thead class="text-primary">
+                                      <tr>
+                                        <th>ID Number</th>
+                                        <th>Name</th>
+                                        <th>Life Status</th>
+                                        <th>Date Joined</th>
+                                      </tr>
+                                  </thead>
+                                <tbody>
+                                    <tr >
+                                        <td >payentID</td>
+                                        <td>name</td>
+                                        <td>payment type</td>
+                                        <td >payment date</td>
+                                    </tr>
+                                </tbody>
+                          </table>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                  <div class="card-header card-header-primary card-header-icon">
+                    <div class="card-icon">
+                      <i class="material-icons">assignment</i>
+                    </div>
+                    <h4 class="card-title"><b> Beneficieries of </b>((NAME))</h4>
+                  </div>
+                    <div class="card-body">
+                        <div class="toolbar">
+                            <!--        Here you can write extra buttons/actions for the toolbar              -->
+                        </div>
+                        <div class="material-datatables">
+                          <table id="datatables" class="table table-striped table-no-bordered table-hover text-primary" cellspacing="0" width="100%" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>ID Number</th>
+                                        <th>Name</th>
+                                        <th>Surname</th>
+                                        <th>Date Joined</th>
+                                      <th class="disabled-sorting text-right">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody> 
+                                    <tr *ngFor="let beneficiary of beneficiaries; let i = index">
+                                        <td >{{ beneficiary.IDNumber }}</td>
+                                        <td >{{ beneficiary.name }}</td>
+                                        <td >{{ beneficiary.surname }}</td>
+                                        <td >{{ beneficiary.date }}</td>
+                                        <td class="text-right">
+                                          <a (click)="editMember(i, beneficiary.idBeneficiaries)" class="btn btn-link btn-info btn-just-icon edit"><i class="material-icons" [class.active]="i == selectedrow">edit</i></a>
+                                          <a (click)="deleteMember(i, beneficiary.idBeneficiaries)" class="btn btn-link btn-danger btn-just-icon remove"><i class="material-icons" [class.active]="i == selectedrow">delete</i></a>
+                                        </td><!--idMembers-->
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end content-->
+                </div>
+            </div>
+                 </div>
+              </div>
+              <div class="tab-pane" id="payments">
+            <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header card-header-icon card-header-rose">
+                    <h4 class="card-title ">Payment Table</h4>
+                  </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                          <table class="table table-hover table-striped">
+                                  <thead class="text-primary">
+                                      <tr>
+                                        <th>Payment ID</th>
+                                        <th>Cashier Name</th>
+                                        <th>Payment Type</th>
+                                        <th>Payment Date</th>
+                                        <th>Total</th>
+                                      </tr>
+                                  </thead>
+                                <tbody>
+                                    <tr >
+                                        <td class="text-secondary">payentID</td>
+                                        <td>name</td>
+                                        <td>payment type</td>
+                                        <td >payment date</td>
+                                        <td>total(R)</td>
+
+                                    </tr>
+                                </tbody>
+                          </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+              </div>
+            </div>
+          <!-- Replace till here-->
+        </div>
+      </div>
+
+
+      <!--
+      <div class="page-categories" hidden>
+          <h3>Page Subcategories</h3>
+          <br />
+          <ul class="nav nav-pills nav-pills-warning nav-pills-icons " role="tablist">
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#link7" role="tablist">
+                Details
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#link8" role="tablist">
+                Payments
+              </a>
+            </li>
+          </ul>
+          <div class="tab-content tab-space tab-subcategories">
+            <div class="tab-pane" id="link7">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Description about product</h4>
+                  <p class="card-category">
+                    More information here
+                  </p>
+                </div>
+                <div class="card-body">
+                  Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits.
+                  <br>
+                  <br> Dramatically visualize customer directed convergence without revolutionary ROI.
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane active" id="link8">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Location of the product</h4>
+                  <p class="card-category">
+                    More information here
+                  </p>
+                </div>
+                <div class="card-body">
+                  Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.
+                  <br>
+                  <br> Dramatically maintain clicks-and-mortar solutions without functional solutions.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      -->

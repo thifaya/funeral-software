@@ -8,6 +8,7 @@ import { ServiceService } from 'src/app/SERVICE/service.service'; // service lin
 import swal from 'sweetalert2';
 import { Moment } from 'moment'
 import * as moment from 'moment';
+import { isNullOrUndefined } from 'util';
 
 declare const $: any;
 
@@ -45,10 +46,12 @@ export class CreateMemberComponent implements OnInit {
     phone; email;
     beneficiary = [];
     i: number;
-     addAdrray = []
+    invalid = false
+    
     selectedProvince: string;
-    selectedGender: string; bname
-    jsonDATA;
+    selectedGender: string;
+    
+    jsonDATA;creator
 
 
     constructor(private formBuilder: FormBuilder, private _servive: ServiceService, private _routet: Router) { }
@@ -109,8 +112,8 @@ export class CreateMemberComponent implements OnInit {
         this.email = document.querySelector('#email')
         this.phone = document.querySelector('#phone')
         this.date = document.querySelector('#date')
-        // beneficiary beneficiaryName beneficiarySurname beneficiaryID
-
+        
+        
         this.email = document.querySelector('#email')
         this.phone = document.querySelector('#phone')
         this.date = document.querySelector('#date')
@@ -125,34 +128,62 @@ export class CreateMemberComponent implements OnInit {
             this.BenefitSurname = document.querySelector('#beneficiarySurname'+this.i)
             this.BenefitIDnum = document.querySelector('#beneficiaryID'+this.i)
 
-            this.beneficiary.push({'name': this.BenefitName.value, 'surname': this.BenefitSurname.value, idnumber: this.BenefitIDnum.value })
+            this.beneficiary.push({'name': this.BenefitName.value, 'surname': this.BenefitSurname.value, 'idnumber': this.BenefitIDnum.value })
         }
         
-        console.log(this.beneficiary)
+        
 
         this.jsonDATA = {
             'name': this.fname.value,
             'surname': this.lname.value,
             'idnumber': this.idNumber.value,
             'email': this.email.value,
-            'contactumber': this.phone.value,
+            'contactnumber': this.phone.value,
             'gender': this.selectedGender,
             'housenumber': this.houseNo.value,
             'streetname': this.streetName.value,
             'suburb': this.suburb.value,
             'province': this.selectedProvince,
-            'beneficiary': this.beneficiary,
-            'birthyear': year
+            'birthyear': year,
+            'beneficiaries':this.beneficiary,
+            'numberOfBeneficiaries': this.BeneficiaryForm.length,
+            'createdby': this.creator
         }
+
+        swal({
+          title: 'Finish Create',
+         text: "Save Member?",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonClass: 'btn btn-success',
+          cancelButtonClass: 'btn btn-danger',
+          cancelButtonText: 'Cancel',
+          confirmButtonText: 'Yes, Save',
+          buttonsStyling: false
+        }).then((result) => {
+          if (result.value) {
+
+            this._servive.createMember(this.jsonDATA)
+            .subscribe(res => {
+                console.log(res)
+                console.log('Member Created')
+              }, err => console.log(err))
+
+            swal(
+              {
+                title: 'Member Created',
+                //text: 'Member Deleted',
+                type: 'success',
+                confirmButtonClass: "btn btn-success",
+                buttonsStyling: false
+    
+              }).then((result) => this._routet.navigate(['/members/createmember']) ) //window.location.reload())
+          }
+        })
+      
 
         console.log(this.jsonDATA)
 
-        /* this._servive.createMember(this.jsonDATA)
-             .subscribe(res => {
-                 console.log('Member Created')
-                 console.log(res)
-             },
-                 err => console.log(err))*/
 
     }
 
@@ -188,40 +219,24 @@ export class CreateMemberComponent implements OnInit {
     removeBeneficiary(index): void {
         //  (<FormArray>this.type.get('beneficiary')).removeAt(index)
         (((this.type.get('BeneficiaryGroup') as FormGroup).get('beneficiary')) as FormArray).removeAt(index)
-        this.addAdrray.pop()
+
     }
     ///////////////////////////////////////////////////////////////////////////////////////
     ngOnInit() {
-
+        
+        this.invalid = false
+        // GETTING NAME OF THE CREATOR
+        if(!isNullOrUndefined( localStorage.getItem('name') )){
+            this.creator = JSON.parse(localStorage.getItem('name'))
+        } else {
+            this.creator = 'System'
+        }
 
         // this.setArrayInputs(this.arrayInputs)
 
         this.type = this.formBuilder.group({
             // To add a validator, we must first convert the string value into an array. The first item in the array is the default value if any, then the next item in the array is the validator. Here we are adding a required validator meaning that the firstName attribute must have a value in it.
-
-            /*  beneficiaryName: [null, Validators.required],
-              beneficiarySurname: [null, Validators.required],
-              beneficiaryID: [null, Validators.required],
-              beneficiary: this.formBuilder.array([new FormControl() ]),
-              
-                              beneficiary: this.formBuilder.array([
-                      this.formBuilder.group({
-                          beneficiaryName: [null, Validators.required],
-                          beneficiarySurname: [null, Validators.required],
-                          beneficiaryID: [null, Validators.required],
-                      })
-                  ])
-              
-  
-                              BeneficiaryGroup: this.formBuilder.group({
-                  beneficiary: new FormArray([
-                      new FormGroup({
-                          beneficiaryName: new FormControl('', [ Validators.required]),
-                          beneficiarySurname: new FormControl('', [ Validators.required]),
-                          beneficiaryID:new FormControl('', [ Validators.required]),
-                      })
-                  ])
-                  */
+ 
             BeneficiaryGroup: this.formBuilder.group({
                 beneficiary: this.formBuilder.array([
                     this.formBuilder.control({
@@ -235,7 +250,8 @@ export class CreateMemberComponent implements OnInit {
 
             firstName: [null, Validators.required],
             idnumber: [null, Validators.required],
-            gender: [null, Validators.required], // drop down list
+            date: [null, Validators.required],
+            selectedGender: [null, Validators.required], // drop down list
             province: [null, Validators.required], // drop down list
             society: [null, Validators.required], // drop down list
             lastName: [null, Validators.required],
@@ -243,18 +259,30 @@ export class CreateMemberComponent implements OnInit {
             streetname: [null, Validators.required],
             suburb: [null, Validators.required],
             phone: [null, Validators.required],
-            agree: [null, Validators.required],
             email: [null, [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
         });
-        // Code for the Validator
+        // Code for the Validator  beneficiaryName
 
         const $validator = $('.card-wizard form').validate({
             rules: {
                 firstname: {
-                    //required: true,
+                    required: true,
                     minlength: 2
                 },
-                gender: {
+                beneficiaryName: {
+                    required: true,
+                    minlength: 2
+                },
+                beneficiarySurname: {
+                    required: true,
+                    minlength: 2
+                },
+                beneficiaryID: {
+                    required: true,
+                    minlength: 13,
+                    maxlength: 13
+                },
+                selectedGender: {
                     required: true,
                     minlength: 2
                 },
@@ -262,33 +290,34 @@ export class CreateMemberComponent implements OnInit {
                     required: true,
                     minlength: 2
                 },
-                agree: {
-                    required: true
+                date: {
+                    date: true,
+                    minlength: 1
                 },
                 idnumber: {
-                    // required: true,
+                    required: true,
                     minlength: 13,
                     maxlength: 13
                 },
                 streetname: {
-                    // required: true,
+                    required: true,
                     minlength: 2
                 },
                 suburb: {
-                    // required: true,
+                    required: true,
                     minlength: 2
                 },
                 housenumber: {
-                    //  required: true,
+                    required: true,
                     minlength: 1
                 },
                 phone: {
-                    //  required: true,
+                    required: true,
                     minlength: 10,
                     maxlength: 10
                 },
                 lastname: {
-                    // required: true,
+                    required: true,
                     minlength: 3
                 },
                 email: {

@@ -10,7 +10,7 @@ export const MembersRoutes: Routes = [
   {
     path: '',
     children: [{
-      path: 'viewallmember',
+      path: 'viewmembers',
       component: ViewMembersComponent
     }]
   },

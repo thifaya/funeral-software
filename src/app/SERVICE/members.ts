@@ -2,17 +2,18 @@ export class Members {
     idMembers: Number;
     name: string;
     surname: string;
-    IDNumber: string;
+    idnumber: string;
     email: string;
-    contactNumber: string;
+    contactnumber: string;
     deceased: string;
     membershipid: string;
     date: Date;
-    createdBy: string;
+    createdby: string;
     gender: string;
-    policyStatus: string;
+    policystatus: string;
     housenumber: Number;
-    streetName: string;
+    streetname: string;
     suburb: string;
     province: string;
+    birthyear: string;
 }

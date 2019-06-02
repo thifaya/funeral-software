@@ -1,8 +1,8 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-8" >
-        <div class="card">
+      <div class="col-md-8 ml-auto mr-auto">
+        <div class="card ">
           <div class="card-header card-header-icon card-header-rose">
             <div class="card-icon">
               <i class="material-icons">perm_identity</i>
@@ -23,17 +23,37 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="bmd-label-floating">Last Name</label>
-                    <input type="text" class="form-control" id="surname" name="surname" placeholder="{{ member.surname }}">
+                    <input type="text" class="form-control" id="surname" name="surname"
+                      placeholder="{{ member.surname }}">
                   </div>
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <div class="form-group">
                     <label class="bmd-label-floating">Identity Number</label>
-                    <input type="number" class="form-control" id="idnumber" name="idnumber" placeholder="{{ member.IDNumber }}">
+                    <input type="number" class="form-control" id="idnumber" name="idnumber"
+                      placeholder="{{ member.idnumber }}">
                   </div>
                 </div>
+
+                <div class="col-md-4">
+                  <label class="bmd-label-floating">Gender</label>
+                  <div>
+                    <mat-form-field>
+                      <mat-select placeholder="{{ member.gender }}" id="gender" name="gender"
+                        [(ngModel)]="selectedGender">
+                        <mat-option *ngFor="let gender of myGenders" [value]="gender.value">
+                          {{ gender.name | titlecase }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+              </div>
+              <div class="row">
+
                 <div class="col-md-5">
                   <div class="form-group">
                     <label class="bmd-label-floating">Email address</label>
@@ -43,25 +63,29 @@
                 <div class="col-md-3">
                   <div class="form-group">
                     <label class="bmd-label-floating">Contact Number</label>
-                    <input type="text" class="form-control" id="contact" name="contact" placeholder="{{ member.contactNumber }}">
+                    <input type="number" class="form-control" id="contact" name="contact"
+                      placeholder="{{ member.contactnumber }}">
                   </div>
                 </div>
+
               </div>
               <label class="bmd-label-floating" style="text-align: center; margin-left: 45%"><b>Address</b></label>
               <div class="row">
-               <!-- <label class="bmd-label-floating" style="text-align: center; margin-left: 45%">Address</label> -->
+                <!-- <label class="bmd-label-floating" style="text-align: center; margin-left: 45%">Address</label> -->
                 <div class="col-md-4">
                   <div class="form-group">
                     <label class="bmd-label-floating">House Number</label>
-                    <input type="text" class="form-control" id="house" name="house" placeholder="{{ member.housenumber }}">
+                    <input type="number" class="form-control" id="house" name="house"
+                      placeholder="{{ member.housenumber }}">
                   </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group">
-                      <label class="bmd-label-floating">Street Name</label>
-                      <input type="text" class="form-control" id="street" name="street" placeholder="{{ member.streetName }}">
-                    </div>
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Street Name</label>
+                    <input type="text" class="form-control" id="street" name="street"
+                      placeholder="{{ member.streetname }}">
                   </div>
+                </div>
               </div>
               <div class="row">
                 <div class="col-md-5">
@@ -70,54 +94,53 @@
                     <input type="text" class="form-control" id="suburb" name="suburb" placeholder="{{ member.suburb }}">
                   </div>
                 </div>
-                <div class="col-md-5">
-                  <div class="form-group">
-                    <label class="bmd-label-floating">Province</label>
-                    <input type="text" class="form-control" id="province" name="province" placeholder="{{ member.province }}">
+
+                  <div class="col-md-4">
+                  <label class="bmd-label-floating">Province</label>
+                  <div>
+                    <mat-form-field>
+                      <mat-select placeholder="{{ member.province }}" id="province" name="province"
+                        [(ngModel)]="selectedProvince">
+                        <mat-option *ngFor="let province of myProvinces" [value]="province.value">
+                          {{ province.name | titlecase }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+              </div>
+              <div class="row">
+
+                <div class="col-8" *ngIf="society">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="material-icons">people</i>
+                    </span>
+                    <mat-form-field>
+                      <mat-select placeholder="((SOCIETY NAME))" id="society" name="society" class="society">
+                        <mat-option *ngFor="let society of societies" [value]="society.idSociety">
+                          {{ society.name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
                   </div>
                 </div>
               </div>
-              <div class="row">
-                
-                  <div class="col-8" *ngIf="society">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">
-                          <i class="material-icons">people</i>
-                        </span>
-                        <mat-form-field >
-                          <mat-select placeholder="((SOCIETY NAME))" id="society" name="society" class="society">
-                            <mat-option *ngFor="let society of societies" [value]="society.idSociety">
-                              {{ society.name }}
-                            </mat-option>
-                          </mat-select>
-                        </mat-form-field>
-                      </div>
-                    </div>
-              </div>
-              <button mat-raised-button type="submit" class="btn btn-rose pull-right" (click)="XupdateMember()">Update Profile</button>
+              <br />
+              <button mat-raised-button type="submit" class="btn btn-rose pull-right" (click)="updateMember()">Update
+                Profile</button>
               <div class="clearfix"></div>
             </form>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card card-profile">
-          <div class="card-avatar">
-            <a href="#pablo">
-              <img class="img" src="./assets/img/faces/marc.jpg" />
-            </a>
-          </div>
-          <div class="card-body">
-            <h6 class="card-category text-gray">CEO / Co-Founder</h6>
-            <h4 class="card-title">Alec Thompson</h4>
-            <p class="card-description">
-              Don't be scared of the truth because we need to restart the human foundation in truth And I love you like
-              Kanye loves Kanye I love Rick Owens’ bed design but the back is...
-            </p>
-            <a href="#pablo" class="btn btn-rose btn-round">Follow</a>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
+
+
+
+                  

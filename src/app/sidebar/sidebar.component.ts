@@ -29,7 +29,7 @@ export const ROUTES: RouteInfo[] = [
         icontype: 'person',
         collapse: 'member',
         children: [
-            {path: 'viewallmember' , title: 'View All Members', ab:'VAM'},
+            {path: 'viewmembers' , title: 'View Members', ab:'VAM'},
             {path: 'createmember' , title: 'Create Member', ab:'CM'}
         ]
     },

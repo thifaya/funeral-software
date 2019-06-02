@@ -9,9 +9,10 @@ export const AppRoutes: Routes = [
 
     {
         path: '',
-        redirectTo: 'dashboard',
+        redirectTo: '/user/login',
         pathMatch: 'full',
-    }, {
+    }, 
+    {
         path: '',
         component: AdminLayoutComponent,
         children: [
@@ -57,12 +58,19 @@ export const AppRoutes: Routes = [
                 loadChildren: './timeline/timeline.module#TimelineModule'
             },
         ]
-    }, {
+    },
+    {
         path: '',
+     //   redirectTo: '/login',
+     //   pathMatch: 'full',
         component: AuthLayoutComponent,
         children: [{
             path: 'pages',
             loadChildren: './pages/pages.module#PagesModule'
-        }]
+        } , {
+            path: 'user',
+            loadChildren: './_userPage/User_page.module#UserPagesModule'
+        } 
+    ]
     }
 ];

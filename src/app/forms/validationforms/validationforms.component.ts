@@ -52,7 +52,7 @@ export class ValidationFormsComponent {
 
    displayFieldCss(form: FormGroup, field: string) {
      return {
-       'has-error': this.isFieldValid(form, field),
+       'has-succes': this.isFieldValid(form, field),
        'has-feedback': this.isFieldValid(form, field)
      };
    }

@@ -83,7 +83,6 @@ export class ViewAllSocietyComponent implements OnInit {
   // Edit society
   editSociety(index, id) {
     this.row = index;
-    console.log('Member ID: ' + id);
     localStorage.setItem('id', JSON.stringify(id));
     this._router.navigate(['/society/editsociety']);
   }

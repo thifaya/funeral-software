@@ -22,13 +22,31 @@ export class ViewMembersComponent implements OnInit {
   public dataTable: DataTable;
   response;
   members;
-  selectedrow;
+  selectedrow; 
+  selectedSearchType
+  searchText = 'ID Number'; 
+  isEmpty = false
+  searchResult = false ;
+  notFound = false;
+  invalidID = false;
+  searchInput
 
-  constructor(private _service: ServiceService, private _router: Router) { }
+  constructor(private _service: ServiceService, private _router: Router) {
+
+   }
+
+  Types = [
+    { id: 1, value: 'Membership Number', viewValue: 'Membership Number' },
+    { id: 2, value: 'ID Number', viewValue: 'ID Number'  },
+    { id: 3, value: 'Surname', viewValue: 'Surname'  }
+];
 
   ngOnInit() {
 
 /*
+
+                     console.log('SUCCES')
+                     console.log(res)
     this._service.getMembers()
       .subscribe(res => {
         this.response = res
@@ -37,22 +55,122 @@ export class ViewMembersComponent implements OnInit {
       },
         err => console.log(err.message))
         */
-       this._service.getMembers()
-        .subscribe(
-          res => {
-            this.response = res
-            this.members = this.response.response
-            console.log(this.members)
-          },
-          err => console.log(err)
-        )
 
 
         
       sessionStorage.clear()
   }
+
   click(index, id) {
   }
+
+  //Search member
+  searchMember() {
+
+    this.isEmpty = false
+    this.searchResult = false
+
+    this.searchInput = document.querySelector('#searchBox') 
+
+    console.log(this.selectedSearchType)
+    console.log(this.searchInput.value)
+
+    console.log(this.searchInput.value.length)
+
+    if(this.searchInput.value == '') {
+      this.isEmpty = true;
+    } else {
+      this.isEmpty = false
+      this.searchResult = false
+      this.notFound = false
+
+      if(this.selectedSearchType == 'Membership Number') {
+
+        this._service.searchMemberByMembershipNumber(this.searchInput.value)
+        .subscribe(res => {
+            this.response = res
+            
+            console.log(this.members)
+
+            if( this.response.response.length > 0 ) {
+              console.log('Search By Membership Number')
+              this.notFound = false
+              this.searchResult = true
+            } else {
+              console.log('NO MEMBERS FOUND')
+              this.searchResult = false
+              this.notFound = true
+            }
+
+          },
+          err => console.log(err)
+        )
+
+      } else
+      if(this.selectedSearchType == 'Surname') {
+        
+        this._service.searchMemberBySurname(this.searchInput.value)
+        .subscribe(res => {
+            this.response = res
+
+            if( this.response.response.length > 0 ) {
+              console.log('Search By Surname')
+              this.notFound = false
+              this.searchResult = true
+            } else {
+              console.log('NO MEMBERS FOUND')
+              this.searchResult = false
+              this.notFound = true
+            }
+
+          },
+          err => console.log(err)
+        )
+
+      } else {
+
+
+
+       if(this.searchInput.value.length == 13 ) {
+        this._service.searchMemberByIdNumber(this.searchInput.value)
+        .subscribe(res => {
+            this.response = res
+            
+            console.log(this.members)
+
+            if( this.response.response.length > 0 ) {
+              console.log('Search By ID Number')
+              this.notFound = false
+              this.searchResult = true
+            } else {
+              console.log('NO MEMBERS FOUND')
+              this.searchResult = false
+              this.notFound = true
+            }
+
+          },
+          err => console.log(err)
+        )
+        
+       } else {
+        this.invalidID = true;
+       }
+
+        
+      }
+    }    
+    
+  }
+
+  selectSearchType() {
+    this.searchText = this.selectedSearchType
+  }
+
+  changeEmpty() {
+    this.isEmpty = false
+    this.invalidID = false
+  }
+
 
   // Edit a member
   editMember(index, id) {
@@ -86,10 +204,12 @@ export class ViewMembersComponent implements OnInit {
       buttonsStyling: false
     }).then((result) => {
       if (result.value) {
+
         this._service.removeMember(id)
           .subscribe(res => {
             console.log(res)
           }, err => console.log(err))
+
         swal(
           {
             title: 'Member Deleted',
@@ -103,7 +223,14 @@ export class ViewMembersComponent implements OnInit {
     })
   }
 
+
+}
+
+
+/*
+
   ngAfterViewInit() {
+
     $('#datatables').DataTable({
       "pagingType": "full_numbers",
       "lengthMenu": [
@@ -118,30 +245,31 @@ export class ViewMembersComponent implements OnInit {
 
     });
 
-    const table = $('#datatables').DataTable();
+const table = $('#datatables').DataTable();
 
-    /* Edit record
-    table.on('click', '.edit', function(e) {
-      const $tr = $(this).closest('tr');
-      const data = table.row($tr).data();
-      alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
-      e.preventDefault();
-    });
+ Edit record
+table.on('click', '.edit', function(e) {
+  const $tr = $(this).closest('tr');
+  const data = table.row($tr).data();
+  alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
+  e.preventDefault();
+});
 
-    // Delete a record
-    table.on('click', '.remove', function(e) {
-      const $tr = $(this).closest('tr');
-      table.row($tr).remove().draw();
-      e.preventDefault();
-    });
-*/
-    //Like record
-    table.on('click', '.like', function (e) {
-      alert('You clicked on Like button');
-      e.preventDefault();
-    });
+// Delete a record
+table.on('click', '.remove', function(e) {
+  const $tr = $(this).closest('tr');
+  table.row($tr).remove().draw();
+  e.preventDefault();
+});
 
-    $('.card .material-datatables label').addClass('form-group');
-  }
+//Like record
+table.on('click', '.like', function (e) {
+  alert('You clicked on Like button');
+  e.preventDefault();
+});
 
+$('.card .material-datatables label').addClass('form-group');
 }
+
+
+*/

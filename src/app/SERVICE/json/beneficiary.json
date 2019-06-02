@@ -7,7 +7,7 @@
             "idMember": 1,
             "name": "asdsad",
             "surname": "asdasd",
-            "IDNumber": "asdasd",
+            "idnumber": "asdasd",
             "date": "asdasd",
             "createdBy": 1
         },
@@ -16,7 +16,7 @@
             "idMember": 77,
             "name": "asdasd",
             "surname": "asdasd",
-            "IDNumber": "asdasd",
+            "idnumber": "asdasd",
             "date": "asdsad",
             "createdBy": 1
         },
@@ -25,7 +25,7 @@
             "idMember": null,
             "name": "ertyu",
             "surname": "mabambi",
-            "IDNumber": null,
+            "idnumber": null,
             "date": "2019-4-30 13:49:34",
             "createdBy": 1
         }

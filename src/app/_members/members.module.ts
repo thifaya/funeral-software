@@ -13,7 +13,6 @@ import { ViewMembersComponent } from './ViewMembers/ViewMembers.component';
 import { CreateMemberComponent } from './CreateMember/CreateMember.component';
 import { EditMemberComponent } from './EditMember/EditMember.component';
 import { MemberDetailsComponent } from './MemberDetails/MemberDetails.component';
-import { SocietyModule } from '../_society/society.module'
 
 
 @NgModule({

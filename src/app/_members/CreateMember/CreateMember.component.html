@@ -83,8 +83,13 @@
                           <mat-form-field class="example-full-width has-label"
                             [ngClass]="displayFieldCss(type, 'idnumber')">
                             <input type="number" name="idnumber" matInput id="idnumber" placeholder="ID Number"
-                              formControlName="idnumber">
+                              formControlName="idnumber" minlength="13" >
                           </mat-form-field>
+                        </div>
+                        <div>
+                          <mat-error *ngIf="false">
+                            ID number must have 13 digits
+                          </mat-error>
                         </div>
 
                       </div>
@@ -94,9 +99,10 @@
                           <span class="input-group-text">
                             <i class="material-icons">wc</i>
                           </span>
-                          <mat-form-field [ngClass]="displayFieldCss(type, 'gender')">
-                            <mat-select placeholder="Select Gender" id="gender" name="gender" class="gender"
-                              formControlName="gender" [(ngModel)]="selectedGender">
+                          <mat-form-field class="example-full-width has-label">
+                            <mat-select placeholder="Select Gender" id="selectedGender" name="selectedGender"
+                              class="selectedGender" formControlName="selectedGender" [(ngModel)]="selectedGender"
+                              required>
                               <mat-option *ngFor="let gender of genders" [value]=" gender.value ">
                                 {{ gender.name }}
                               </mat-option>
@@ -105,17 +111,21 @@
                         </div>
 
                       </div>
-                      <!-- Birthyear -->
-                      <div class="col-6 input-group-prepend mr-auto">
-                        <span class="input-group-text">
-                          <i class="material-icons"></i>
-                        </span>
-                        <mat-form-field>
-                          <input matInput [matDatepicker]="picker" placeholder="Data of Birth" readonly id="date"
-                            class="date" name="date" (click)="picker.open()">
-                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                          <mat-datepicker #picker startView="year"></mat-datepicker>
-                        </mat-form-field>
+
+                      <div class="col-12">
+
+                        <!-- Birthyear -->
+                        <div class="col-6 input-group-prepend mr-auto">
+                          <span class="input-group-text">
+                            <i class="material-icons"></i>
+                          </span>
+                          <mat-form-field [ngClass]="displayFieldCss(type, 'date')">
+                            <input matInput [matDatepicker]="picker" placeholder="Data of Birth" readonly id="date"
+                              class="date" name="date" (click)="picker.open()" formControlName="date">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker startView="year"></mat-datepicker>
+                          </mat-form-field>
+                        </div>
                       </div>
 
                     </div>
@@ -129,49 +139,7 @@
                       <div class="col-md-12">
                         <div formGroupName="BeneficiaryGroup" class="card">
                           <div formArrayName="beneficiary" class="card-body text-center" style="padding: 0%">
-                            <!--
-                            <div class="input-group form-control-lg">
-
-                              <div class="col-4 input-group-prepend">
-                                <span class="input-group-text">
-                                <i class="material-icons">face</i>
-                                </span>
-                                <mat-form-field class="example-full-width has-label"
-                                  [ngClass]="displayFieldCss(type, 'beneficiaryName')">
-                                  <input type="text" name="beneficiaryName" matInput id="beneficiaryName"
-                                    placeholder="Name" formControlName="beneficiaryName">
-                                </mat-form-field>
-                              </div>
-                              <div class="col-4 input-group-prepend">
-                                <span class="input-group-text">
-                                  <i class="material-icons">record_voice_over</i>
-                                </span>
-                                <mat-form-field class="example-full-width has-label"
-                                  [ngClass]="displayFieldCss(type, 'beneficiarySurname')">
-                                  <input type="text" name="beneficiarySurname" matInput id="beneficiarySurname"
-                                    placeholder="Surname" formControlName="beneficiarySurname">
-                                </mat-form-field>
-                              </div>
-                              <div class="col-3 input-group-prepend">
-                                <span class="input-group-text">
-                                  <i class="material-icons">perm_identity</i>
-                                </span>
-                                <mat-form-field class="example-full-width has-label"
-                                  [ngClass]="displayFieldCss(type, 'beneficiaryID')">
-                                  <input type="number" name="beneficiaryID" matInput id="beneficiaryID"
-                                    placeholder="ID Number" formControlName="beneficiaryID">
-                                </mat-form-field>
-                              </div>
-                              <button mat-raised-button type="button" class="btn btn-danger btn-just-icon btn-link">
-                                  <i class="material-icons">close</i>
-                              </button>
-                            </div>
-                            <br/>
-                            9FJR1R34LH4FWR
-
-                            forrmGroupName="beneficiary"
-                          -->
-
+    
                             <div class="input-group form-control-lg"
                               *ngFor="let benefit of BeneficiaryForm; let i = index">
 
@@ -215,75 +183,10 @@
                         </div>
                       </div>
                     </div>
-                    <button mat-raised-button class="btn btn-info btn-sm" (click)="addBeneficiary()" class="add"
-                      id="add" name="add">Add
+                    <button mat-raised-button type="button" class="btn btn-info btn-sm" (click)="addBeneficiary()"
+                      class="add" id="add" name="add">Add
                       Benefetiary</button>
                   </div>
-                  <!--
-                              
-        <div class="row">
-          <div class="col-md-6 ml-auto mr-auto">
-            <div class="card">
-              <div class="card-body text-center">
-                <code>col-md-6 ml-auto mr-auto</code>
-              </div>
-            </div>
-          </div>
-        </div>
-                              <div class="input-group form-control-lg">
-                                <div class="row" style="width:100%">
-                                  <div class="col-sm-16" style="width:100%">
-                                    <div class="row" style="width:100%">
-                                      <div class="col-4 ml-auto mr-auto">
-                                        <div class="input-group-prepend">
-                                          <span class="input-group-text">
-                                            <i class="material-icons">face</i>
-                                          </span>
-                                          <mat-form-field class="example-full-width has-label"
-                                            [ngClass]="displayFieldCss(type, 'idnumber')">
-                                            <input type="number" name="idnumber" matInput id="idnumber"
-                                              placeholder="Name" formControlName="idnumber">
-                                          </mat-form-field>
-                                        </div>
-                                        <div>
-                                        </div>
-                                      </div>
-                                      <div class="col-7 ml-auto mr-auto">
-                                        <div class="input-group-prepend">
-                                          <span class="input-group-text">
-                                            <i class="material-icons">perm_identity</i>
-                                          </span>
-                                          <mat-form-field class="example-full-width has-label"
-                                            [ngClass]="displayFieldCss(type, 'idnumber')">
-                                            <input type="number" name="idnumber" matInput id="idnumber"
-                                              placeholder="Surname" formControlName="idnumber">
-                                          </mat-form-field>
-                                        </div>
-                                        <div>
-                                        </div>
-                                      </div>
-                                      <div class="col-7 ml-auto mr-auto">
-                                        <div class="input-group-prepend">
-                                          <span class="input-group-text">
-                                            <i class="material-icons">perm_identity</i>
-                                          </span>
-                                          <mat-form-field class="example-full-width has-label"
-                                            [ngClass]="displayFieldCss(type, 'idnumber')">
-                                            <input type="number" name="idnumber" matInput id="idnumber"
-                                              placeholder="ID Number" formControlName="idnumber">
-                                          </mat-form-field>
-                                        </div>
-                                        <div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <br />
-                               <input type="button" class="btn btn-previous btn-fill btn-default btn-wd disabled" name="previous"
-                      value="ADD" id="prev">
-                            -->
 
 
                   <!-- ADDRESS -->
@@ -296,7 +199,7 @@
                         <h5 class="info-text"> </h5>
                       </div>
 
-                      <!--                         
+                      <!--fff
                         <div class="col-sm-3" hidden>
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -309,7 +212,7 @@
                                 </mat-form-field>
                               </div>
                         </div> 
-
+-->
                         
                       <div class="col-sm-7" hidden>
                         <mat-form-field class="example-full-width">
@@ -317,19 +220,20 @@
                         </mat-form-field>
                       </div>
 
--->
-                      <div class="col-sm-4">
+                    <!--fff-->
+                     <div class="col-sm-4">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
                             <i class="material-icons">home</i>
                           </span>
                           <mat-form-field class="example-full-width has-label"
                             [ngClass]="displayFieldCss(type, 'housenumber')">
-                            <input type="text" name="housenumber" matInput id="housenumber" class="housenumber"
+                            <input type="number" name="housenumber" matInput id="housenumber" class="housenumber"
                               placeholder="House No." formControlName="housenumber">
                           </mat-form-field>
                         </div>
                       </div>
+
                       <div class="col-sm-7">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
@@ -378,6 +282,8 @@
                       <div class="col-sm-12">
                         <h5 class="info-text"> CONTACT INFORMATION</h5>
                       </div>
+
+                      <!--fff
                       <div class="col-sm-4" hidden>
                         <div class="input-group-prepend">
                           <span class="input-group-text">
@@ -390,6 +296,7 @@
                           </mat-form-field>
                         </div>
                       </div>
+                      -->
                       <div class="col-sm-7">
                         <div class="input-group form-control-lg">
                           <div class="input-group-prepend">
@@ -478,6 +385,7 @@
                       </div>
                     </div>
                   </div>
+                  <!-- /TERMS AND CONDITIONS-->
                 </div>
               </div>
               <div class="card-footer">

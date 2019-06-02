@@ -53,44 +53,43 @@ import { AppRoutes } from './app.routing';
 //////////////////////////////////////////////////////
 import { HttpClientModule } from '@angular/common/http';
 import { ServiceService } from './SERVICE/service.service';
-import { SocietyModule } from './_society/society.module';
-import { MembersModule } from './_members/members.module'
 
 @NgModule({
-  exports: [
-    MatAutocompleteModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatChipsModule,
-    MatStepperModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatExpansionModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatRippleModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    MatSortModule,
-    MatTableModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule
-  ],
-  declarations: [ ]
+   exports: [
+      MatAutocompleteModule,
+      MatButtonModule,
+      MatButtonToggleModule,
+      MatCardModule,
+      MatCheckboxModule,
+      MatChipsModule,
+      MatStepperModule,
+      MatDatepickerModule,
+      MatDialogModule,
+      MatExpansionModule,
+      MatGridListModule,
+      MatIconModule,
+      MatInputModule,
+      MatListModule,
+      MatMenuModule,
+      MatNativeDateModule,
+      MatPaginatorModule,
+      MatProgressBarModule,
+      MatProgressSpinnerModule,
+      MatRadioModule,
+      MatRippleModule,
+      MatSelectModule,
+      MatSidenavModule,
+      MatSliderModule,
+      MatSlideToggleModule,
+      MatSnackBarModule,
+      MatSortModule,
+      MatTableModule,
+      MatTabsModule,
+      MatToolbarModule,
+      MatTooltipModule
+   ],
+   declarations: [
+   ]
 })
 export class MaterialModule {}
 

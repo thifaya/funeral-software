@@ -237,7 +237,7 @@ export class MemberDetailsComponent implements OnInit {
       title: 'Edit Beneficiary',
       html:
         '<div class="row">' +
-       ' <form name="sweet">'+
+        
         '<div class="col-10">' +
 
         ' <div class="row">' +
@@ -264,7 +264,7 @@ export class MemberDetailsComponent implements OnInit {
         '<input matInput type="number" name="idnumber" minLength id="IDNumber" placeholder="' + IDNUMBER + '" class="form-control" />' +
         '</div>' +
         '</div>' +
-        '</form>'+
+        
         '</div>',
       showCancelButton: true,
       confirmButtonClass: 'btn btn-success',
@@ -295,35 +295,23 @@ export class MemberDetailsComponent implements OnInit {
         }
 
 
-        if (this.BenefitIdNumber.length < 13) {
-          console.log('invalid')
-          
-          swal({
-            title: "Invalid ID Number!",
-            text: "An ID Number must have 13 digits",
-            timer: 1000,
-            showConfirmButton: false
-        }).catch(swal.noop)
+        console.log('valid')
 
-        } else {
-          console.log('valid')
-
-          this._service.updateBeneficiary(id, { 'name': this.BenefitName, 'surname': this.BenefitSurname, 'idnumber': this.BenefitIdNumber })
-            .subscribe(res => {
-              console.log(res)
+        this._service.updateBeneficiary(id, { 'name': this.BenefitName, 'surname': this.BenefitSurname, 'idnumber': this.BenefitIdNumber })
+          .subscribe(res => {
+            console.log(res)
 
 
-              swal(
-                {
-                  title: 'Updates Succesfully Saved',
-                  type: 'success',
-                  confirmButtonClass: "btn btn-success",
-                  buttonsStyling: false
+            swal(
+              {
+                title: 'Updates Succesfully Saved',
+                type: 'success',
+                confirmButtonClass: "btn btn-success",
+                buttonsStyling: false
 
-                }).then((result) => window.location.reload())
-            })
+              }).then((result) => window.location.reload())
+          })
 
-        }
 
 
       }

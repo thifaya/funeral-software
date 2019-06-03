@@ -34,8 +34,11 @@ export class MemberDetailsComponent implements OnInit {
   policystatus; color;
   createdby; noBeneficiary = false
   BenefitName; BenefitSurname = []; BenefitIdNumber;
-  editTextBox = false; asd
+  editTextBox = false;
+  date
   creator
+  payments
+  Nopayment = false;
 
   constructor(private fb: FormBuilder, private _service: ServiceService) {
 
@@ -78,12 +81,13 @@ export class MemberDetailsComponent implements OnInit {
           this.contact = this.singleMember.response[0].contactnumber
           this.membershipID = this.singleMember.response[0].membershipnumber
           this.policystatus = this.singleMember.response[0].policystatus
+          this.date = this.singleMember.response[0].date
           this.createdby = this.singleMember.response[0].createdby
           this.noBeneficiary = false
 
-          
 
-            this._service.getMemberBeneficiary( this.membershipID )
+
+          this._service.getMemberBeneficiary(this.membershipID)
             .subscribe(res => {
               this.response = res;
               this.beneficiaries = this.response.response
@@ -101,6 +105,21 @@ export class MemberDetailsComponent implements OnInit {
               } else {
                 this.noBeneficiary = false
               }
+
+              this._service.payments(this.membershipID)
+                .subscribe(res => {
+                  this.response = res
+                  
+                  this.payments = this.response.response
+                  if(this.payments.length > 0){
+                    this.Nopayment = false
+                    console.log('Number of payments: ' + this.payments.length)
+                    console.log(this.payments)
+                  } else {
+                    this.Nopayment = true
+                  }
+                }, err => console.log(err))
+
               console.log(this.beneficiaries)
             },
               err => console.log(err))
@@ -121,36 +140,43 @@ export class MemberDetailsComponent implements OnInit {
     }
 
   }
-  editMember(index, id) {
-    this.selectedrow = index;
 
-    swal({
-      title: 'Edit BeneficiaRY',
-      html: '<div class="form-group">' +
-        '<input id="input-field" type="text" class="form-control" />' +
-        '</div>',
-      showCancelButton: true,
-      confirmButtonClass: 'btn btn-success',
-      cancelButtonClass: 'btn btn-danger',
-      buttonsStyling: false
-    }).then(function (result) {
-      swal({
-        type: 'success',
-        html: 'You entered: <strong>' +
-          $('#input-field').val() +
-          '</strong>',
-        confirmButtonClass: 'btn btn-success',
-        buttonsStyling: false
 
-      })
-    }).catch(swal.noop)
-  }
-  // {"name":"YEBO","surname":"ertyuio","idnumber":"23456789"}
-  // Delete a member              "idBeneficiaries": 69,
-  //        "membershipnumber": "2019163630",
+
+  /* editMember(index, id) {
+     this.selectedrow = index;
+ 
+     swal({
+       title: 'Edit BeneficiaRY',
+       html: '<div class="form-group">' +
+         '<input id="input-field" type="text" class="form-control" />' +
+         '</div>',
+       showCancelButton: true,
+       confirmButtonClass: 'btn btn-success',
+       cancelButtonClass: 'btn btn-danger',
+       buttonsStyling: false
+     }).then(function (result) {
+       swal({
+         type: 'success',
+         html: 'You entered: <strong>' +
+           $('#input-field').val() +
+           '</strong>',
+         confirmButtonClass: 'btn btn-success',
+         buttonsStyling: false
+ 
+       })
+     }).catch(swal.noop)
+   }
+   // {"name":"YEBO","surname":"ertyuio","idnumber":"23456789"}
+   // Delete a member              "idBeneficiaries": 69,
+           "membershipnumber": "2019163630", 
+           */
+
+
+
   deleteBeneficiary(index, id, NAME, SURNAME) {
     this.selectedrow = index;
-    
+
     swal({
       title: 'Delete ' + NAME + ' ' + SURNAME,
       text: "As a Beneficiary",
@@ -205,12 +231,13 @@ export class MemberDetailsComponent implements OnInit {
   editbeneficiary(index, id, NAME, SURNAME, IDNUMBER) {
     this.selectedrow = index;
 
-    
+
 
     swal({
       title: 'Edit Beneficiary',
       html:
         '<div class="row">' +
+       ' <form name="sweet">'+
         '<div class="col-10">' +
 
         ' <div class="row">' +
@@ -234,11 +261,10 @@ export class MemberDetailsComponent implements OnInit {
         '<div class="row">' +
         ' <label class=" col-4 col-form-label">ID number: </label>' +
         '<div class="col-8">' +
-        '<input matInput type="number" id="IDNumber" placeholder="' + IDNUMBER + '" class="form-control" />' +
+        '<input matInput type="number" name="idnumber" minLength id="IDNumber" placeholder="' + IDNUMBER + '" class="form-control" />' +
         '</div>' +
         '</div>' +
-
-        '</div>' +
+        '</form>'+
         '</div>',
       showCancelButton: true,
       confirmButtonClass: 'btn btn-success',
@@ -268,21 +294,36 @@ export class MemberDetailsComponent implements OnInit {
           this.BenefitIdNumber = $('#IDNumber').val()
         }
 
-        this._service.updateBeneficiary(id, { 'name': this.BenefitName,'surname': this.BenefitSurname,'idnumber': this.BenefitIdNumber} )
-          .subscribe(res => {
-            console.log(res)
-      
-            
-            swal(
-              {
-                title: 'Updates Succesfully Saved',
-                type: 'success',
-                confirmButtonClass: "btn btn-success",
-                buttonsStyling: false
-    
-              }).then((result) => window.location.reload())
-          })
 
+        if (this.BenefitIdNumber.length < 13) {
+          console.log('invalid')
+          
+          swal({
+            title: "Invalid ID Number!",
+            text: "An ID Number must have 13 digits",
+            timer: 1000,
+            showConfirmButton: false
+        }).catch(swal.noop)
+
+        } else {
+          console.log('valid')
+
+          this._service.updateBeneficiary(id, { 'name': this.BenefitName, 'surname': this.BenefitSurname, 'idnumber': this.BenefitIdNumber })
+            .subscribe(res => {
+              console.log(res)
+
+
+              swal(
+                {
+                  title: 'Updates Succesfully Saved',
+                  type: 'success',
+                  confirmButtonClass: "btn btn-success",
+                  buttonsStyling: false
+
+                }).then((result) => window.location.reload())
+            })
+
+        }
 
 
       }
@@ -296,12 +337,12 @@ export class MemberDetailsComponent implements OnInit {
 /*
 PAYMENTS
             "idlastPaid": 114,
-            "date": "2019-5-31 16:25:30",
+            "date": "2019-5-31 16:25:30",   Jan 27, 2015
             "amount": "0",
             "membershipnumber": "2019162530"
 
 
-
+January 29, 2015 at 16:58
 
 
 "response": [

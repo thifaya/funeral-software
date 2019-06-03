@@ -110,18 +110,23 @@
     <div class="tab-content tab-space tab-subcategories">
       <div class="tab-pane active" id="details">
         <div class="row">
-          <div class="col-sm-5 cards">
+          <div class="col-sm-5 ">
+            <div class="cards">
             <div class="card card-pricing card-raised">
-              <div class="card-body">
-                <h6 class="card-category"><b>Home Address</b></h6>
-                <p class="card-description">
-                  {{housenumber}} {{streetname}}
-                </p>
-                <p class="card-description">
-                  {{suburb}} {{province}}
-                </p>
+                <div class="card-body">
+                  <h6 class="card-category"><b>Home Address</b></h6>
+                  <p class="card-description">
+                    {{housenumber}} {{streetname}}
+                  </p>
+                  <p class="card-description">
+                    {{suburb}} {{province}}
+                  </p>
+                </div>
               </div>
             </div>
+            <p class="card-description">
+              created:<b> {{ date | date: "EEEE MMMM dd, yyyy 'at' HH:mm"}} </b>
+            </p>  
           </div>
           <div class="card col-sm-6 card-profile">
 
@@ -139,7 +144,9 @@
             </div>
           </div>
 
-          <div class="col-md-12">
+
+
+          <div class="col-md-12" *ngIf="!noBeneficiary">
             <div class="card">
               <div class="card-header card-header-primary card-header-icon">
                 <div class="card-icon">
@@ -180,7 +187,7 @@
                         <!--idMembers-->
                       </tr>
                       
-                      <footer  style="background-color: grey" *ngIf="noBeneficiary">NO BENEFICIARY</footer>
+
                     </tbody>
                   </table>
                 </div>
@@ -189,6 +196,17 @@
             </div>
           </div>
         </div>
+
+        <div class="row" *ngIf="noBeneficiary">
+          <div class="col-12 ml-auto mr-auto" >
+            <div class="card" style="background-color: lightgray">
+              <div class="card-body text-center card-description">
+                <h3><b>No Beneficiary</b></h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
       <div class="tab-pane" id="payments">
         <div class="col-md-12">
@@ -209,12 +227,12 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td class="text-secondary">payentID</td>
-                      <td>name</td>
-                      <td>payment type</td>
-                      <td>payment date</td>
-                      <td>total(R)</td>
+                    <tr *ngFor="let payment of payments" >
+                      <td class="text-info">{{payment.idlastPaid}}</td>
+                      <td>{{createdby}}</td>
+                      <td>cash</td>
+                      <td> {{ payment.date | date }}</td>
+                      <td>{{ payment.amount | currency:  'ZAR':"symbol-narrow" }}</td>
 
                     </tr>
                   </tbody>
@@ -224,7 +242,15 @@
             </div>
           </div>
         </div>
-
+        <div class="row" *ngIf="Nopayment">
+          <div class="col-12 ml-auto mr-auto" >
+            <div class="card" style="background-color: lightgray">
+              <div class="card-body text-center card-description">
+                <h3><b>No Payments Made</b></h3>
+              </div>
+            </div>
+          </div>
+        </div>
         
       </div>
     </div>

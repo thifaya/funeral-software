@@ -45,6 +45,15 @@
       </div>
     </div>
 
+    <div class="row" *ngIf="notFound">
+      <div class="col-12 ml-auto mr-auto">
+        <div class="card">
+          <div class="card-body text-center">
+            <h5><b>Member(s) Not Found.</b> <span class="text-info"><h6>Try searching using a different category</h6></span></h5>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="row" *ngIf="searchResult">
       <div class="col-md-12">
         <div class="card">

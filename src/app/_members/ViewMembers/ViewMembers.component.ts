@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ServiceService } from 'src/app/SERVICE/service.service'; // service link here
 import swal from 'sweetalert2';
+import { isNullOrUndefined } from 'util';
 declare var $: any;
 
 declare interface DataTable {
@@ -22,43 +23,43 @@ export class ViewMembersComponent implements OnInit {
   public dataTable: DataTable;
   response;
   members;
-  selectedrow; 
+  selectedrow;
   selectedSearchType
-  searchText = 'ID Number'; 
+  searchText = 'ID Number';
   isEmpty = false
-  searchResult = false ;
+  searchResult = false;
   notFound = false;
   invalidID = false;
   searchInput
 
   constructor(private _service: ServiceService, private _router: Router) {
 
-   }
+  }
 
   Types = [
     { id: 1, value: 'Membership Number', viewValue: 'Membership Number' },
-    { id: 2, value: 'ID Number', viewValue: 'ID Number'  },
-    { id: 3, value: 'Surname', viewValue: 'Surname'  }
-];
+    { id: 2, value: 'ID Number', viewValue: 'ID Number' },
+    { id: 3, value: 'Surname', viewValue: 'Surname' }
+  ];
 
   ngOnInit() {
 
-/*
+    /*
+    
+                         console.log('SUCCES')
+                         console.log(res)
+        this._service.getMembers()
+          .subscribe(res => {
+            this.response = res
+            this.members = this.response.response
+            console.log(this.members)
+          },
+            err => console.log(err.message))
+            */
 
-                     console.log('SUCCES')
-                     console.log(res)
-    this._service.getMembers()
-      .subscribe(res => {
-        this.response = res
-        this.members = this.response.response
-        console.log(this.members)
-      },
-        err => console.log(err.message))
-        */
 
 
-        
-      sessionStorage.clear()
+    sessionStorage.clear()
   }
 
   click(index, id) {
@@ -69,30 +70,32 @@ export class ViewMembersComponent implements OnInit {
 
     this.isEmpty = false
     this.searchResult = false
+    this.notFound = false
 
-    this.searchInput = document.querySelector('#searchBox') 
+    this.searchInput = document.querySelector('#searchBox')
 
     console.log(this.selectedSearchType)
     console.log(this.searchInput.value)
 
-    console.log(this.searchInput.value.length)
 
-    if(this.searchInput.value == '') {
+    if (this.searchInput.value == '' || isNullOrUndefined(this.searchInput.value)) {
+      this.searchResult = false
+      this.notFound = false
       this.isEmpty = true;
     } else {
       this.isEmpty = false
       this.searchResult = false
       this.notFound = false
 
-      if(this.selectedSearchType == 'Membership Number') {
+      if (this.selectedSearchType == 'Membership Number') {
 
         this._service.searchMemberByMembershipNumber(this.searchInput.value)
-        .subscribe(res => {
+          .subscribe(res => {
             this.response = res
-            
+
             console.log(this.members)
 
-            if( this.response.response.length > 0 ) {
+            if (this.response.response.length > 0  ) {
               console.log('Search By Membership Number')
               this.notFound = false
               this.searchResult = true
@@ -103,63 +106,61 @@ export class ViewMembersComponent implements OnInit {
             }
 
           },
-          err => console.log(err)
-        )
+            err => {
+              console.log(err)
+              console.log(this.response.error)
+            }
+          )
 
       } else
-      if(this.selectedSearchType == 'Surname') {
-        
-        this._service.searchMemberBySurname(this.searchInput.value)
-        .subscribe(res => {
-            this.response = res
+        if (this.selectedSearchType == 'Surname') {
 
-            if( this.response.response.length > 0 ) {
-              console.log('Search By Surname')
-              this.notFound = false
-              this.searchResult = true
-            } else {
-              console.log('NO MEMBERS FOUND')
-              this.searchResult = false
-              this.notFound = true
-            }
+          this._service.searchMemberBySurname(this.searchInput.value)
+            .subscribe(res => {
+              this.response = res
 
-          },
-          err => console.log(err)
-        )
+              if (this.response.response.length > 0) {
+                console.log('Search By Surname')
+                this.notFound = false
+                this.searchResult = true
+              } else {
+                console.log('NO MEMBERS FOUND')
+                this.searchResult = false
+                this.notFound = true
+              }
 
-      } else {
+            },
+              err => console.log(err)
+            )
 
+        } else
+          if (this.searchInput.value.length == 13 || this.selectedSearchType == 'ID Number') {
+            this._service.searchMemberByIdNumber(this.searchInput.value)
+              .subscribe(res => {
+                this.response = res
 
+                console.log(this.members)
 
-       if(this.searchInput.value.length == 13 ) {
-        this._service.searchMemberByIdNumber(this.searchInput.value)
-        .subscribe(res => {
-            this.response = res
-            
-            console.log(this.members)
+                if (this.response.response.length > 0) {
+                  console.log('Search By ID Number')
+                  this.notFound = false
+                  this.searchResult = true
+                } else {
+                  console.log('NO MEMBERS FOUND')
+                  this.searchResult = false
+                  this.notFound = true
+                }
 
-            if( this.response.response.length > 0 ) {
-              console.log('Search By ID Number')
-              this.notFound = false
-              this.searchResult = true
-            } else {
-              console.log('NO MEMBERS FOUND')
-              this.searchResult = false
-              this.notFound = true
-            }
+              },
+                err => console.log(err)
+              )
 
-          },
-          err => console.log(err)
-        )
-        
-       } else {
-        this.invalidID = true;
-       }
+          } else {
+            this.invalidID = true;
+          }
 
-        
-      }
-    }    
-    
+    }
+
   }
 
   selectSearchType() {
@@ -183,9 +184,9 @@ export class ViewMembersComponent implements OnInit {
   // View member details
   viewMember(index, id) {
     this.selectedrow = index;
-    console.log('Member ID: ' + id); 
+    console.log('Member ID: ' + id);
     localStorage.setItem('id', JSON.stringify(id));
-    this._router.navigate(['/members/viewmemberdetails']);   
+    this._router.navigate(['/members/viewmemberdetails']);
   }
 
   // Delete a member

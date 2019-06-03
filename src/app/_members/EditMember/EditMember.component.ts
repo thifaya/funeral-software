@@ -20,7 +20,7 @@ export class EditMemberComponent implements OnInit {
 
 
 
-  testAll: boolean;
+  testAll;
   membershipID
   JSONData = {};
   fname; newNAME
@@ -224,6 +224,10 @@ export class EditMemberComponent implements OnInit {
         this._service.updateMember(this.membershipID, this.JSONData)
           .subscribe(res => {
             console.log(res)
+            this.testAll = res
+            if(this.testAll.code != 200){
+            console.log(this.testAll.error)
+            }
             console.log('Member Updated')
           //  window.location.reload()
           }, err => console.log(err))

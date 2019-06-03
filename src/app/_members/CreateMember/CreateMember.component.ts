@@ -47,6 +47,7 @@ export class CreateMemberComponent implements OnInit {
     beneficiary = [];
     i: number;
     invalid = false
+    invalidID = false
     
     selectedProvince: string;
     selectedGender: string;
@@ -96,7 +97,18 @@ export class CreateMemberComponent implements OnInit {
 
     ///////////////////////////////////////////////////////////////////////////////////////
 
+nextPan() {
+    
+    this.idNumber = document.querySelector('#idnumber')
 
+    if(this.idNumber.value.length < 13){
+        this.invalidID = true
+    } else {
+        this.invalidID = false
+    }
+   
+    console.log(this.idNumber)
+}
 
 
     finishCreate() {
@@ -177,7 +189,7 @@ export class CreateMemberComponent implements OnInit {
                 confirmButtonClass: "btn btn-success",
                 buttonsStyling: false
     
-              }).then((result) => this._routet.navigate(['/members/createmember']) ) //window.location.reload())
+              }).then((result) => window.location.reload())
           }
         })
       

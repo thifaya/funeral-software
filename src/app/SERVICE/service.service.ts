@@ -120,5 +120,8 @@ export class ServiceService {
     //return this._http.get(this.beneficiary);   1
   }
 
+  payments(id) {
+    return this._http.get('http://greenlinks1.dedicated.co.za:3000/api/payments/' + id, { headers: this.Header })
+  }
 
 }

@@ -41,6 +41,7 @@ export class ViewMembersComponent implements OnInit {
     { id: 2, value: 'ID Number', viewValue: 'ID Number' },
     { id: 3, value: 'Surname', viewValue: 'Surname' }
   ];
+  
 
   ngOnInit() {
 

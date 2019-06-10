@@ -21,15 +21,25 @@ export const AppRoutes: Routes = [
                 path: 'members',
                 loadChildren: './_members/members.module#MembersModule'
             },
-            {
+           /* {
                 // PAYMENTS MODULE
                 path: 'payments',
                 loadChildren: './payments/payments.module#PaymentsModule'
-            },
+            },*/
             {
                 // SOCIETY MODULE
                 path: 'society',
                 loadChildren: './_society/society.module#SocietyModule'
+            },
+            {
+                // PAYMENTS MODULE
+                path: 'payments',
+                loadChildren: './_payments/payments.module#PaymentsModule'
+            },
+            {
+                // CLAIMS MODULE
+                path: 'claims',
+                loadChildren: './_claims/claims.module#ClaimsModule'
             },
             {
                 path: '',

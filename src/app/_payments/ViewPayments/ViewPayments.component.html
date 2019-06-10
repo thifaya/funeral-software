@@ -1,0 +1,149 @@
+<div class="main-content">
+    <div class="container-fluid">
+  
+      <div class="row">
+        <div class="col-md-12 ml-auto mr-auto">
+          <div class="card">
+            <div class="card-body">
+              <!--
+              <div class="col-6">
+                <mat-form-field>
+                  <mat-select placeholder="Search Member By: " name="searchType" id="searchType"
+                    [(ngModel)]="selectedSearchType" (click)="changeEmpty()" (select)="changeEmpty()">
+                    <mat-option *ngFor="let type of Types" [value]="type.value" (click)="selectSearchType()">
+                      {{ type.viewValue }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+  
+              <div class="col-6">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Search {{ searchText }}" type="search" id="searchBox" name="searchBox"
+                    (focus)="changeEmpty()" required>
+                </mat-form-field>
+              </div>
+            -->
+              <div class="col-12">
+  
+                <!-- From Date -->
+                <div class="col-6 input-group-prepend mr-auto">
+                  <span class="input-group-text">
+                    <i class="material-icons"></i>
+                  </span>
+                  <mat-form-field  (click)="fromEnable()">
+                    <input matInput [matDatepicker]="picker" placeholder="From" readonly id="fromDate" name="fromDate"
+                      (click)="picker.open()" class="date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker startView="year"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-5" *ngIf='fromNULL'>
+                  <mat-error>
+                    Please From Select Date
+                  </mat-error>
+                </div>
+              </div>
+  
+              <div class="col-12">
+  
+                <!-- To Date  
+                <legend>Datepicker Year</legend> -->
+                <div class="col-6 input-group-prepend mr-auto">
+                  <span class="input-group-text">
+                    <i class="material-icons"></i>
+                  </span>
+                  <mat-form-field (click)="toEnable()" >
+                    <input matInput [matDatepicker]="picker2" placeholder="To" readonly id="toDate" name="toDate"
+                      (click)="picker2.open()" class="date">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2 startView="year"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-5" *ngIf='toNULL'>
+                  <mat-error>
+                    Please To Select Date
+                  </mat-error>
+                </div>
+              </div>
+  
+              <div class="col-5" *ngIf='isEmpty'>
+                <mat-error>
+                  Member's {{searchText}} is Required
+                </mat-error>
+              </div>
+  
+              <div class="col-2">
+                <button mat-raised-button type="submit" class="btn btn-sm" id="searchButton" name="searchButton"
+                  (click)="searchClaim()"> <i class="material-icons">search</i> Search For Claims</button>
+  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+
+      
+      <div class="row" *ngIf="notFound">
+        <div class="col-12 ml-auto mr-auto">
+          <div class="card">
+            <div class="card-body text-center">
+              <h5><b>Member(s) Not Found.</b> <span class="text-info">
+                  <h6>Try searching by using a different category</h6>
+                </span></h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-md-12" *ngIf="table">
+              <div class="card">
+                <div class="card-header card-header-icon card-header-rose">
+                  <h4 class="card-title ">Payment Table</h4>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                      <thead class="text-primary">
+                        <tr>
+                          <th>Payment ID</th>
+                          <th>Date</th>
+                          <th>Amount</th>
+                          <th>Channel</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="text-info">id</td>
+                          <td>yyyy/mm/dd</td>
+                          <td>R0.00</td>
+                          <td> Channel </td>        
+                        </tr>
+                      </tbody>
+                    </table>
+        
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="Nopayment">
+              <div class="col-12 ml-auto mr-auto" >
+                <div class="card" style="background-color: lightgray">
+                  <div class="card-body text-center card-description">
+                    <h3><b>No Payments Made</b></h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <!-- end col-md-12 -->
+      </div>
+      <!-- end row -->
+    </div>
+  </div>
+
+<div class="tab-pane" id="mypayments">
+
+    
+  </div>
+  

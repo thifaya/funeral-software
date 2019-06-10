@@ -41,7 +41,18 @@ export const ROUTES: RouteInfo[] = [
         icontype: 'person',
         collapse: 'payments',
         children: [
-            {path: 'viewpayments' , title: 'View All Payments', ab:'VP'}
+            {path: 'viewpayments' , title: 'View All Payments', ab:'VAP'}
+        ]
+    },
+    {
+        path: '/claims',
+        title: 'Claims',
+        type: 'sub',
+        icontype: 'supervisor_account',
+        collapse: 'claims',
+        children: [
+            {path: 'viewallclaims' , title: 'View All Claims', ab:'VAC'},
+            {path: 'createclaim' , title: 'Create Claim', ab:'CC'}
         ]
     },
     
@@ -51,8 +62,21 @@ export const ROUTES: RouteInfo[] = [
 
 
     
-    /*
-        {
+    
+       /* 
+       
+           {
+        path: '/payments',
+        title: 'Payments',
+        type: 'sub',
+        icontype: 'person',
+        collapse: 'payments',
+        children: [
+            {path: 'viewpayments' , title: 'View All Payments', ab:'VP'}
+        ]
+    },
+       
+       {
         path: '/members',
         title: 'Individual Members',
         type: 'sub',
@@ -62,7 +86,7 @@ export const ROUTES: RouteInfo[] = [
             {path: 'viewmembers' , title: 'View Members', ab:'VAM'},
             {path: 'createmember' , title: 'Create Member', ab:'CM'}
         ]
-    },
+        }*/,
     {
         path: '/society',
         title: 'Society',
@@ -161,7 +185,7 @@ export const ROUTES: RouteInfo[] = [
             {path: 'lock', title: 'Lock Screen Page', ab:'LSP'},
             {path: 'user', title: 'User Page', ab:'UP'}
         ]
-    }*/
+    }
 ];
 @Component({
     selector: 'app-sidebar-cmp',

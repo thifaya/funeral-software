@@ -21,7 +21,7 @@ export class EditMemberComponent implements OnInit {
 
 
   testAll;
-  membershipID
+  membershipID;
   JSONData = {};
   fname; newNAME
   lname; newSURNAME
@@ -239,7 +239,7 @@ export class EditMemberComponent implements OnInit {
             confirmButtonClass: "btn btn-success",
             buttonsStyling: false
 
-          }).then((result) => this._router.navigate(['/members/viewmembers']) )
+          }).then((result) => this._router.navigate(['/members/searchmember']) )
       }
     })
 

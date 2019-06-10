@@ -22,6 +22,11 @@ export const AppRoutes: Routes = [
                 loadChildren: './_members/members.module#MembersModule'
             },
             {
+                // PAYMENTS MODULE
+                path: 'payments',
+                loadChildren: './payments/payments.module#PaymentsModule'
+            },
+            {
                 // SOCIETY MODULE
                 path: 'society',
                 loadChildren: './_society/society.module#SocietyModule'

@@ -38,7 +38,7 @@ export class CreateMemberComponent implements OnInit {
 
     societies; response
     fname; lname;
-    BenefitName ; BenefitSurname ;
+    BenefitName; BenefitSurname;
     BenefitIDnum; dateV: string
     idNumber; date;
     houseNo; streetName;
@@ -48,11 +48,11 @@ export class CreateMemberComponent implements OnInit {
     i: number;
     invalid = false
     invalidID = false
-    
+
     selectedProvince: string;
     selectedGender: string;
-    
-    jsonDATA;creator
+
+    jsonDATA; creator
 
 
     constructor(private formBuilder: FormBuilder, private _servive: ServiceService, private _routet: Router) { }
@@ -97,18 +97,18 @@ export class CreateMemberComponent implements OnInit {
 
     ///////////////////////////////////////////////////////////////////////////////////////
 
-nextPan() {
-    
-    this.idNumber = document.querySelector('#idnumber')
+    nextPan() {
 
-    if(this.idNumber.value.length < 13){
-        this.invalidID = true
-    } else {
-        this.invalidID = false
+     //   this.idNumber = document.querySelector('#idnumber')
+
+        if (this.idNumber.value.length < 13) {
+            this.invalidID = true
+        } else {
+            this.invalidID = false
+        }
+
+       // console.log(this.idNumber)
     }
-   
-    console.log(this.idNumber)
-}
 
 
     finishCreate() {
@@ -124,8 +124,8 @@ nextPan() {
         this.email = document.querySelector('#email')
         this.phone = document.querySelector('#phone')
         this.date = document.querySelector('#date')
-        
-        
+
+
         this.email = document.querySelector('#email')
         this.phone = document.querySelector('#phone')
         this.date = document.querySelector('#date')
@@ -134,16 +134,17 @@ nextPan() {
         const year = moment(this.date.value).format('YYYY')
         this.beneficiary = [];
 
-        for(this.i=0; this.i< this.BeneficiaryForm.length ; this.i++) {
+        for (this.i = 0; this.i < this.BeneficiaryForm.length; this.i++) {
 
-            this.BenefitName = document.querySelector('#beneficiaryName'+this.i)
-            this.BenefitSurname = document.querySelector('#beneficiarySurname'+this.i)
-            this.BenefitIDnum = document.querySelector('#beneficiaryID'+this.i)
+            this.BenefitName = document.querySelector('#beneficiaryName' + this.i)
+            this.BenefitSurname = document.querySelector('#beneficiarySurname' + this.i)
+            this.BenefitIDnum = document.querySelector('#beneficiaryID' + this.i)
 
-            this.beneficiary.push({'name': this.BenefitName.value, 'surname': this.BenefitSurname.value, 'idnumber': this.BenefitIDnum.value })
+            // tslint:disable-next-line: max-line-length
+            this.beneficiary.push({ 'name': this.BenefitName.value, 'surname': this.BenefitSurname.value, 'idnumber': this.BenefitIDnum.value })
         }
-        
-        
+
+
 
         this.jsonDATA = {
             'name': this.fname.value,
@@ -157,42 +158,42 @@ nextPan() {
             'suburb': this.suburb.value,
             'province': this.selectedProvince,
             'birthyear': year,
-            'beneficiaries':this.beneficiary,
+            'beneficiaries': this.beneficiary,
             'numberOfBeneficiaries': this.BeneficiaryForm.length,
             'createdby': this.creator
         }
 
         swal({
-          title: 'Finish Create',
-         text: "Save Member?",
-          type: 'warning',
-          showCancelButton: true,
-          confirmButtonClass: 'btn btn-success',
-          cancelButtonClass: 'btn btn-danger',
-          cancelButtonText: 'Cancel',
-          confirmButtonText: 'Yes, Save',
-          buttonsStyling: false
+            title: 'Finish Create',
+            text: "Save Member?",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonClass: 'btn btn-success',
+            cancelButtonClass: 'btn btn-danger',
+            cancelButtonText: 'Cancel',
+            confirmButtonText: 'Yes, Save',
+            buttonsStyling: false
         }).then((result) => {
-          if (result.value) {
+            if (result.value) {
 
-            this._servive.createMember(this.jsonDATA)
-            .subscribe(res => {
-                console.log(res)
-                console.log('Member Created')
-              }, err => console.log(err))
+                this._servive.createMember(this.jsonDATA)
+                    .subscribe(res => {
+                        console.log(res)
+                        console.log('Member Created')
+                    }, err => console.log(err))
 
-            swal(
-              {
-                title: 'Member Created',
-                //text: 'Member Deleted',
-                type: 'success',
-                confirmButtonClass: "btn btn-success",
-                buttonsStyling: false
-    
-              }).then((result) => window.location.reload())
-          }
+                swal(
+                    {
+                        title: 'Member Created',
+                        //text: 'Member Deleted',
+                        type: 'success',
+                        confirmButtonClass: "btn btn-success",
+                        buttonsStyling: false
+
+                    }).then((result) => window.location.reload())
+            }
         })
-      
+
 
         console.log(this.jsonDATA)
 
@@ -235,10 +236,10 @@ nextPan() {
     }
     ///////////////////////////////////////////////////////////////////////////////////////
     ngOnInit() {
-        
+
         this.invalid = false
         // GETTING NAME OF THE CREATOR
-        if(!isNullOrUndefined( localStorage.getItem('name') )){
+        if (!isNullOrUndefined(localStorage.getItem('name'))) {
             this.creator = JSON.parse(localStorage.getItem('name'))
         } else {
             this.creator = 'System'
@@ -248,7 +249,7 @@ nextPan() {
 
         this.type = this.formBuilder.group({
             // To add a validator, we must first convert the string value into an array. The first item in the array is the default value if any, then the next item in the array is the validator. Here we are adding a required validator meaning that the firstName attribute must have a value in it.
- 
+
             BeneficiaryGroup: this.formBuilder.group({
                 beneficiary: this.formBuilder.array([
                     this.formBuilder.control({

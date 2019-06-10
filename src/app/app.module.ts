@@ -54,6 +54,7 @@ import { AppRoutes } from './app.routing';
 import { HttpClientModule } from '@angular/common/http';
 import { ServiceService } from './SERVICE/service.service';
 
+
 @NgModule({
    exports: [
       MatAutocompleteModule,
@@ -88,8 +89,6 @@ import { ServiceService } from './SERVICE/service.service';
       MatToolbarModule,
       MatTooltipModule
    ],
-   declarations: [
-   ]
 })
 export class MaterialModule {}
 

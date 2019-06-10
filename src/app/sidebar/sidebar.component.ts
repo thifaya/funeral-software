@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import PerfectScrollbar from 'perfect-scrollbar';
+import { isNullOrUndefined } from 'util';
 
 declare const $: any;
 
@@ -23,6 +24,35 @@ export interface ChildrenItems {
 //Menu Items
 export const ROUTES: RouteInfo[] = [
     {
+        path: '/members',
+        title: 'Individual Members',
+        type: 'sub',
+        icontype: 'person',
+        collapse: 'member',
+        children: [
+            {path: 'searchmember' , title: 'Search For Members', ab:'SFM'},
+            {path: 'createmember' , title: 'Create Member', ab:'CM'}
+        ]
+    },
+    {
+        path: '/payments',
+        title: 'Payments',
+        type: 'sub',
+        icontype: 'person',
+        collapse: 'payments',
+        children: [
+            {path: 'viewpayments' , title: 'View All Payments', ab:'VP'}
+        ]
+    },
+    
+    
+
+
+
+
+    
+    /*
+        {
         path: '/members',
         title: 'Individual Members',
         type: 'sub',
@@ -131,7 +161,7 @@ export const ROUTES: RouteInfo[] = [
             {path: 'lock', title: 'Lock Screen Page', ab:'LSP'},
             {path: 'user', title: 'User Page', ab:'UP'}
         ]
-    }
+    }*/
 ];
 @Component({
     selector: 'app-sidebar-cmp',
@@ -140,6 +170,8 @@ export const ROUTES: RouteInfo[] = [
 
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
+    user;
+    role
 
     isMobileMenu() {
         if ($(window).width() > 991) {
@@ -150,6 +182,16 @@ export class SidebarComponent implements OnInit {
 
     ngOnInit() {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
+        
+                // GETTING NAME OF THE CREATOR
+                if (!isNullOrUndefined(localStorage.getItem('name'))) {
+                    this.user = JSON.parse(localStorage.getItem('name'))
+                    this.role = JSON.parse(localStorage.getItem('role'))
+                } else {
+                    this.user = 'ADMINISTRATOR'
+                    this.role = 'Admin'
+                }
+
     }
     updatePS(): void  {
         if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {

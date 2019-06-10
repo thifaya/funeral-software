@@ -46,6 +46,10 @@
         background-color: #e53935;
     }
 
+    &[data-background-color="blue"]{
+        background-color: transparent;
+    }
+
     .sidebar-wrapper{
         position: relative;
         height: calc(100vh - 75px);
@@ -387,7 +391,13 @@
           color: $white-color;
         }
     }
+    &[data-background-color="blue"]{
+        @include sidebar-background-color($gray-base, $white-color);
 
+        .nav li .dropdown-menu .dropdown-item{
+          color: $white-color;
+        }
+    }
     &[data-color="purple"]{
         @include set-background-color-button($brand-primary);
     }
@@ -411,6 +421,28 @@
         @include set-background-color-button($white-color);
         @include sidebar-active-color($black-color);
     }
+    
+
+        // color for line separator and hover o item   $brand-info
+        &[data-background-color="blue"]{
+            @include sidebar-background-color(#304FFE, $white-color);
+    
+            .user,
+            .logo,
+            .nav li.separator{
+                &:after{
+                    background-color: rgb(255, 255, 255);
+                }
+            }
+    
+            .nav{
+                li:hover:not(.active) > a,
+                li.active > [data-toggle="collapse"]{
+                    background-color:  rgba(255, 255, 255, 0.27);
+                }
+            }
+        }
+
 
     &[data-background-color="red"]{
         @include sidebar-background-color($brand-danger, $white-color);

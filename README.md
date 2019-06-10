@@ -79,7 +79,7 @@ Quick start options:
 4. Run in terminal: ```npm install -g @angular/cli```
 5. Then: ```npm install```
 6. And: ```npm start```
-7. Navigate to [localhost:4200](localhost:4200)
+7. Navigate to [localhost:4200](localhost:)
 
 ## Documentation
 The documentation for the Material Dashboard Pro Angular is hosted at our [website](https://demos.creative-tim.com/material-dashboard-pro-angular2/documentation/tutorial).

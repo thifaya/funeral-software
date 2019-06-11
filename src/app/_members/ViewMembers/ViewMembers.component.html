@@ -44,7 +44,14 @@
         </div>
       </div>
     </div>
-
+    <!-- div class="loader-wrapper" (load)="">
+        <span class="loader"><span class="loader-inner"></span></span>
+    </div>
+    <script>
+        $(window).on("load",function(){
+          $(".loader-wrapper").fadeOut("slow");
+        });
+    </script -->
     <div class="row" *ngIf="notFound">
       <div class="col-12 ml-auto mr-auto">
         <div class="card">

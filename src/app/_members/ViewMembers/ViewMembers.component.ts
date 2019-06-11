@@ -31,6 +31,7 @@ export class ViewMembersComponent implements OnInit {
   notFound = false;
   invalidID = false;
   searchInput
+  tes = false;
 
   constructor(private _service: ServiceService, private _router: Router) {
 
@@ -40,10 +41,19 @@ export class ViewMembersComponent implements OnInit {
     { id: 1, value: 'Membership Number', viewValue: 'Membership Number' },
     { id: 2, value: 'ID Number', viewValue: 'ID Number' },
     { id: 3, value: 'Surname', viewValue: 'Surname' }
-  ];
-  
+  ];/*
+  $(window).on("load",function(){
+    $(".loader-wrapper").fadeOut("slow");
+});
+*/
+
+
+
 
   ngOnInit() {
+    window.onload = () => {
+      console.log('loading...')
+  };
 
     /*
     
@@ -63,7 +73,10 @@ export class ViewMembersComponent implements OnInit {
     sessionStorage.clear()
   }
 
-  click(index, id) {
+  click() {
+    this.tes = true
+
+    window.onloadstart
   }
 
   //Search member

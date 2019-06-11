@@ -80,16 +80,16 @@
   </div>
 </div>
 <div class="main-content">
-<h3>
+  <h3>
     <div class="row">
-        <div class="col-6" >
-          <span style="size: 15%">Membership Number: {{membershipID}}</span>
-        </div>
-        <div class="col-5" style="text-align: right;">
-          Policy Status: <span class="{{color}}">{{policystatus}}</span>
-        </div>
+      <div class="col-6">
+        <span style="size: 15%">Membership Number: {{membershipID}}</span>
       </div>
-</h3>
+      <div class="col-5" style="text-align: right;">
+        Policy Status: <span class="{{color}}">{{policystatus}}</span>
+      </div>
+    </div>
+  </h3>
 
   <span>Created By: {{createdby}}</span>
   <br />
@@ -112,7 +112,7 @@
         <div class="row">
           <div class="col-sm-5 ">
             <div class="cards">
-            <div class="card card-pricing card-raised">
+              <div class="card card-pricing card-raised">
                 <div class="card-body">
                   <h6 class="card-category"><b>Home Address</b></h6>
                   <p class="card-description">
@@ -126,7 +126,7 @@
             </div>
             <p class="card-description">
               created:<b> {{ date | date: "EEEE MMMM dd, yyyy 'at' HH:mm"}} </b>
-            </p>  
+            </p>
           </div>
           <div class="card col-sm-6 card-profile">
 
@@ -134,9 +134,10 @@
               <h5 class="card-category text-gray"><b>Member Details</b></h5>
               <h4 class="card-title text-black"> {{firstName}} {{lastName}} </h4>
               <p class="card-description">
-                ID number: <b>{{idnumber}}</b> <br /><br /> email: <b>{{email}}</b> <br /> Contact Number: <b>{{contact}}</b>
-              </p> 
-          <!-- SOCIETY NAME TEXT BOX HERE  
+                ID number: <b>{{idnumber}}</b> <br /><br /> email: <b>{{email}}</b> <br /> Contact Number:
+                <b>{{contact}}</b>
+              </p>
+              <!-- SOCIETY NAME TEXT BOX HERE  
               <p class="card-description" *ngIf="society">
                 Society Name: <b>{{societyname}}</b>
               </p>    -->
@@ -152,7 +153,7 @@
                 <div class="card-icon">
                   <i class="material-icons">assignment</i>
                 </div>
-                <h4 class="card-title"><b> Beneficieries of </b>{{firstName}}  {{ lastName }}</h4>
+                <h4 class="card-title"><b> Beneficieries of </b>{{firstName}} {{ lastName }}</h4>
               </div>
               <div class="card-body">
                 <div class="toolbar">
@@ -186,25 +187,33 @@
                         </td>
                         <!--idMembers-->
                       </tr>
-                      
+
 
                     </tbody>
                   </table>
                 </div>
               </div>
-              <!-- end content-->
+              <!-- end content  (click)="editMember(i, member.idMembers)" -->
             </div>
           </div>
         </div>
 
         <div class="row" *ngIf="noBeneficiary">
-          <div class="col-12 ml-auto mr-auto" >
+          <div class="col-12 ml-auto mr-auto">
             <div class="card" style="background-color: lightgray">
               <div class="card-body text-center card-description">
                 <h3><b>No Beneficiary</b></h3>
               </div>
             </div>
           </div>
+        </div>
+        <div>
+          <button mat-raised-button type="button" (click)="createBeneficiary()" mat-raised-button
+            class="btn btn-primary btn-sm pull-right" id="add" name="add"><b>+</b>Add
+            Benefetiary</button>
+          <button mat-raised-button class="btn btn-primary btn-sm pull-right" (click)="editMember()"><i
+              class="material-icons">edit</i> Edit Member</button>
+
         </div>
 
       </div>
@@ -227,7 +236,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let payment of payments" >
+                    <tr *ngFor="let payment of payments">
                       <td class="text-info">{{payment.idlastPaid}}</td>
                       <td>{{createdby}}</td>
                       <td>cash</td>
@@ -243,7 +252,7 @@
           </div>
         </div>
         <div class="row" *ngIf="Nopayment">
-          <div class="col-12 ml-auto mr-auto" >
+          <div class="col-12 ml-auto mr-auto">
             <div class="card" style="background-color: lightgray">
               <div class="card-body text-center card-description">
                 <h3><b>No Payments Made</b></h3>
@@ -251,7 +260,7 @@
             </div>
           </div>
         </div>
-        
+
       </div>
     </div>
     <!-- Replace till here-->

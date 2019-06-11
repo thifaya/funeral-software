@@ -124,9 +124,9 @@
                     <td>Date</td>
                     <td>Paid</td>
                     <td class="text-right">
-                      <a (click)="claimInfo(i)"
-                        class="btn btn-link btn-warning btn-just-icon view"><i class="material-icons"
-                          [class.active]="i == selectedClaim">info</i></a>
+                      <button (click)="claimInfo(i)"
+                        class="btn btn-link btn-warning "><i class="material-icons"
+                          [class.active]="i == selectedClaim">info</i>Claim Info</button>
                     </td>
                   </tr>
                 </tbody>

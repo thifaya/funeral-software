@@ -40,7 +40,7 @@ export class MemberDetailsComponent implements OnInit {
   payments
   Nopayment = false;
 
-  constructor(private fb: FormBuilder, private _service: ServiceService) {
+  constructor(private fb: FormBuilder, private _service: ServiceService, private _router: Router) {
 
     this.addForm = this.fb.group({
       items: [null, Validators.required],
@@ -221,13 +221,15 @@ export class MemberDetailsComponent implements OnInit {
     });
   }
 
-  /* Edit a member
-  editMember(index, id) {
-    this.selectedrow = index;
-    console.log('Member ID: ' + id);
-    localStorage.setItem('id', JSON.stringify(id));
+  // Edit a member
+  editMember() {
+  //  this.selectedrow = index;
+  //  console.log('Member ID: ' + id);
+  //  localStorage.setItem('id', JSON.stringify(id));
     this._router.navigate(['/members/editmember']);
-  }*/
+  }
+
+
   editbeneficiary(index, id, NAME, SURNAME, IDNUMBER) {
     this.selectedrow = index;
 
@@ -319,10 +321,99 @@ export class MemberDetailsComponent implements OnInit {
 
 
   }
+
+  createBeneficiary() {
+    swal({
+      title: 'Create Beneficiary',
+      html:
+        '<div class="row">' +
+        
+        '<div class="col-10">' +
+
+        ' <div class="row">' +
+        ' <label class=" col-4 col-form-label">Name: </label>' +
+        '<div class="col-8">' +
+        '<mat-form-field class="example-full-width">' +
+        '<input matInput type="text" id="Name"   class="form-control" />' +
+        '</mat-form-field>' +
+        '</div>' +
+        '</div>' +
+
+        '<div class="row">' +
+        ' <label class=" col-4 col-form-label">Surname: </label>' +
+        '<div class="col-8">' +
+        '<mat-form-field class="example-full-width">' +
+        '<input matInput type="text" id="Surname"   class="form-control" />' +
+        '</mat-form-field>' +
+        '</div>' +
+        '</div>' +
+
+        '<div class="row">' +
+        ' <label class=" col-4 col-form-label">ID number: </label>' +
+        '<div class="col-8">' +
+        '<input matInput type="number" name="idnumber" minLength id="IDNumber"  class="form-control" />' +
+        '</div>' +
+        '</div>' +
+        
+        '</div>',
+      showCancelButton: true,
+      confirmButtonClass: 'btn btn-success',
+      cancelButtonClass: 'btn btn-danger',
+      buttonsStyling: false
+    }).then((result) => {
+      if (result.value) {
+
+
+
+
+        console.log('valid')
+/*
+        this._service.updateBeneficiary(id, { 'name': this.BenefitName, 'surname': this.BenefitSurname, 'idnumber': this.BenefitIdNumber })
+          .subscribe(res => {
+            console.log(res)
+
+
+            swal(
+              {
+                title: 'Updates Succesfully Saved',
+                type: 'success',
+                confirmButtonClass: "btn btn-success",
+                buttonsStyling: false
+
+              }).then((result) => window.location.reload())
+          })
+          */
+
+
+
+      }
+    })
+  }
 }
 
 
 /*
+
+        // NEW BENEFICIARY NAME
+        if ($('#Name').val() == '' || isNullOrUndefined($('#Name').val())) {
+          this.BenefitName = NAME
+        } else {
+          this.BenefitName = $('#Name').val()
+        }
+
+        // NEW BENEFICIARY SURNAME
+        if ($('#Surname').val() == '' || isNullOrUndefined($('#Surname').val())) {
+          this.BenefitSurname = SURNAME
+        } else {
+          this.BenefitSurname = $('#Surname').val()
+        }
+
+        // NEW BENEFICIARY ID NUMBER
+        if ($('#IDNumber').val() == '' || isNullOrUndefined($('#IDNumber').val())) {
+          this.BenefitIdNumber = IDNUMBER
+        } else {
+          this.BenefitIdNumber = $('#IDNumber').val()
+        }
 PAYMENTS
             "idlastPaid": 114,
             "date": "2019-5-31 16:25:30",   Jan 27, 2015

@@ -16,6 +16,12 @@ export const AppRoutes: Routes = [
         path: '',
         component: AdminLayoutComponent,
         children: [
+            
+            {
+                // DASHBOARD MODULE
+                path: '',
+                loadChildren: './_dashboard/dashboard.module#DashboardsModule'
+            },
             {
                 // MEMBERS MODULE
                 path: 'members',
@@ -42,7 +48,7 @@ export const AppRoutes: Routes = [
                 loadChildren: './_claims/claims.module#ClaimsModule'
             },
             {
-                path: '',
+                path: 'DASHboard',
                 loadChildren: './dashboard/dashboard.module#DashboardModule'
             }, {
                 path: 'components',

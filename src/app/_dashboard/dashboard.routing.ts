@@ -1,14 +1,14 @@
 import { Routes } from '@angular/router';
 
-import { DashboardComponent } from './dashboard.component';
+import { DashBoardComponent } from './DashBoard.component';
 
 export const DashboardRoutes: Routes = [
     {
 
       path: '',
       children: [ {
-        path: 'DASHboard',
-        component: DashboardComponent
+        path: 'dashboard',
+        component: DashBoardComponent
     }]
 }
 ];

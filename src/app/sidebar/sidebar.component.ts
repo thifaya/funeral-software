@@ -101,7 +101,7 @@ export const ROUTES: RouteInfo[] = [
     },
     {
     
-        path: '/dashboard',
+        path: '/DASHboard',
         title: 'Dashboard',
         type: 'link',
         icontype: 'dashboard'

@@ -3,13 +3,23 @@
     "error": null,
     "response": [
         {
-            "idBeneficiaries": 1,
-            "idMember": 1,
-            "name": "asdsad",
-            "surname": "asdasd",
-            "idnumber": "asdasd",
-            "date": "asdasd",
-            "createdBy": 1
+            "Nr": "DFP 1973",
+            "Surname": "MOYO-SENWELO",
+            "Name": "EMILY",
+            "Initials": "E",
+            "ID_Number": "9108101074088",
+            "Family_member": "CHILD",
+            "Inception_date": "25-02-2018",
+            "R7R": "R 7000.00",
+            "DOB": "1991/08/10",
+            "Age": "23",
+            "Family_type": "F",
+            "CFD": null,
+            "Cover_wanted": null,
+            "F9": null,
+            "F12": null,
+            "F14": null,
+            "F15": null
         },
         {
             "idBeneficiaries": 2,

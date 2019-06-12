@@ -38,7 +38,7 @@ export const ROUTES: RouteInfo[] = [
         path: '/payments',
         title: 'Payments',
         type: 'sub',
-        icontype: 'person',
+        icontype: 'payment',
         collapse: 'payments',
         children: [
             {path: 'viewpayments' , title: 'View All Payments', ab:'VAP'}
@@ -48,7 +48,7 @@ export const ROUTES: RouteInfo[] = [
         path: '/claims',
         title: 'Claims',
         type: 'sub',
-        icontype: 'supervisor_account',
+        icontype: 'supervisor_account', //supervisor_account  money
         collapse: 'claims',
         children: [
             {path: 'viewallclaims' , title: 'View All Claims', ab:'VAC'},
@@ -86,7 +86,7 @@ export const ROUTES: RouteInfo[] = [
             {path: 'viewmembers' , title: 'View Members', ab:'VAM'},
             {path: 'createmember' , title: 'Create Member', ab:'CM'}
         ]
-        }*/,
+        },
     {
         path: '/society',
         title: 'Society',
@@ -185,7 +185,7 @@ export const ROUTES: RouteInfo[] = [
             {path: 'lock', title: 'Lock Screen Page', ab:'LSP'},
             {path: 'user', title: 'User Page', ab:'UP'}
         ]
-    }
+    }*/
 ];
 @Component({
     selector: 'app-sidebar-cmp',

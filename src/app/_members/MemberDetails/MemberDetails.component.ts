@@ -34,6 +34,7 @@ export class MemberDetailsComponent implements OnInit {
   policystatus; color;
   createdby; noBeneficiary = false
   BenefitName; BenefitSurname = []; BenefitIdNumber;
+  memberId
   editTextBox = false;
   date
   creator
@@ -80,11 +81,11 @@ export class MemberDetailsComponent implements OnInit {
           this.province = this.singleMember.response[0].province
           this.contact = this.singleMember.response[0].contactnumber
           this.membershipID = this.singleMember.response[0].membershipnumber
+          this.memberId = this.singleMember.response[0].idMembers
           this.policystatus = this.singleMember.response[0].policystatus
           this.date = this.singleMember.response[0].date
           this.createdby = this.singleMember.response[0].createdby
           this.noBeneficiary = false
-
 
 
           this._service.getMemberBeneficiary(this.membershipID)
@@ -223,9 +224,9 @@ export class MemberDetailsComponent implements OnInit {
 
   // Edit a member
   editMember() {
-  //  this.selectedrow = index;
-  //  console.log('Member ID: ' + id);
-  //  localStorage.setItem('id', JSON.stringify(id));
+   // this.selectedrow = index;
+    localStorage.setItem('id', JSON.stringify(this.memberId));
+    sessionStorage.setItem('fromMemberDetails', JSON.stringify(true));
     this._router.navigate(['/members/editmember']);
   }
 

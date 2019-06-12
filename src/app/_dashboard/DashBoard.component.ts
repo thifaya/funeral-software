@@ -16,6 +16,15 @@ export class DashBoardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+  }
+
+  load() {
+    window.addEventListener('load',function() {
+      const loader = document.querySelector('.loader')
+      console.log(loader)
+      loader.className += ' hidden';
+    })
   }
 
 }

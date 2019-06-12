@@ -192,6 +192,7 @@ export class ViewMembersComponent implements OnInit {
     this.selectedrow = index;
     console.log('Member ID: ' + id);
     localStorage.setItem('id', JSON.stringify(id));
+    sessionStorage.clear()
     this._router.navigate(['/members/editmember']);
   }
 

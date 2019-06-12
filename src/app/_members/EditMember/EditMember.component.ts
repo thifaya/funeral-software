@@ -239,7 +239,7 @@ export class EditMemberComponent implements OnInit {
             confirmButtonClass: "btn btn-success",
             buttonsStyling: false
 
-          }).then((result) => this._router.navigate(['/members/searchmember']) )
+          }).then((result) => { if(sessionStorage.getItem('fromMemberDetails') == 'true') { this._router.navigate(['/members/viewmemberdetails']) } else { this._router.navigate(['/members/searchmember']) }} )
       }
     })
 

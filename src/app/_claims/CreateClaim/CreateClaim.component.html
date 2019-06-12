@@ -86,8 +86,8 @@
                       <td>{{ member.name }}</td>
                       <td>{{ member.surname }}</td>
                       <td class="text-right">
-                        <a (click)="createClaim(i)" class="btn btn-link btn-info btn-just-icon edit"><i
-                            class="material-icons" [class.active]="i == selectedrow">create</i></a>
+                        <button (click)="createClaim(i)" class="btn btn-link btn-info "><i
+                            class="material-icons" [class.active]="i == selectedrow">create</i>Create Claim</button>
                       </td>
                     </tr>
                   </tbody>

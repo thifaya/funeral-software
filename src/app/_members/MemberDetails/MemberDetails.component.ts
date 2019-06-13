@@ -41,6 +41,14 @@ export class MemberDetailsComponent implements OnInit {
   payments
   Nopayment = false;
 
+  payment_toNULL = false; claim_toNULL = false
+  payment_fromNULL = false ; claim_fromNULL = false
+  paymentTable = false ; claimTable = false
+
+  fromDate
+  toDate
+  selectedClaim
+
   constructor(private fb: FormBuilder, private _service: ServiceService, private _router: Router) {
 
     this.addForm = this.fb.group({
@@ -56,6 +64,7 @@ export class MemberDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+
 
     if (!isNullOrUndefined(sessionStorage.getItem('greenlinks'))) {
       this.society = true
@@ -390,6 +399,86 @@ export class MemberDetailsComponent implements OnInit {
       }
     })
   }
+
+
+
+  fromEnable() {
+    
+    if(this.claim_fromNULL) {
+      this.claim_fromNULL = false
+    }
+
+    if(this.payment_fromNULL) {
+      this.payment_fromNULL = false
+    }
+
+  }
+
+  toEnable() {
+
+    if(this.claim_toNULL) {
+      this.claim_toNULL = false
+    }
+
+    if(this.payment_toNULL) {
+      this.payment_toNULL = false
+    }
+
+  }
+
+  searchClaim() {
+
+
+    this.toDate = document.querySelector('#ClaimtoDate')
+    this.fromDate = document.querySelector('#ClaimfromDate')
+
+    if (this.toDate.value == '') {
+      this.claim_toNULL = true
+    }
+
+    if (this.fromDate.value == '') {
+      this.claim_fromNULL = true
+    }
+
+    if(!this.claim_fromNULL && !this.claim_toNULL) {
+      this.claimTable = true
+    } else {
+      this.claimTable = false
+    }
+
+  }
+
+    // View member details
+    claimInfo(index) {
+      this.selectedClaim = index;
+     // console.log('Member ID: ' + id);
+    //  localStorage.setItem('id', JSON.stringify(id));
+      this._router.navigate(['/claims/claiminfo']);
+    }
+
+
+    searchPayments() {
+
+      this.toDate = document.querySelector('#PaymenttoDate')
+      this.fromDate = document.querySelector('#PaymentfromDate')
+
+      if (this.toDate.value == '') {
+        this.payment_toNULL = true
+      }
+  
+      if (this.fromDate.value == '') {
+        this.payment_fromNULL = true
+      }
+  
+      if(!this.payment_fromNULL && !this.payment_toNULL) {
+        this.paymentTable = true
+      } else {
+        this.paymentTable = false
+      }
+  
+    }
+
+
 }
 
 
